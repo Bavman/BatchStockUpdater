@@ -44,6 +44,7 @@ namespace BatchStockUpdater.UI
             LoginCheck(UserNameTextBox.Text, PasswordTextBox.Text);
         }
 
+        // Check the user credentials match and fire LogInApproved in the MainWinow
         private void LoginCheck(string userNameCheck, string passwordCheck)
         {
             var userList = _usersRepository.UserList;
@@ -80,6 +81,7 @@ namespace BatchStockUpdater.UI
             }
         }
 
+        // Reset Username and Password TextBoxes
         private void ClearUserNameAndPasswordTextBoxes()
         {
             UserNameTextBox.Text = String.Empty;
