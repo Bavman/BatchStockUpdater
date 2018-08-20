@@ -1,0 +1,23 @@
+﻿<Window x:Class="BatchStockUpdater.UI.PreferencesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BatchStockUpdater.UI"
+        mc:Ignorable="d"
+        Title="Preferences" Height="330" Width="600">
+    <Grid>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="121" Margin="61,42,0,0" VerticalAlignment="Top" Width="471"/>
+        <CheckBox x:Name="EnableDateTimeCheckBox" Content="Check CSV date and time before import" HorizontalAlignment="Left" Margin="87,53,0,0" VerticalAlignment="Top" FontSize="14" Checked ="EnableDateTimeCheck_Checked" Unchecked ="EnableDateTimeCheck_Unchecked" IsChecked="True"/>
+        <TextBlock x:Name="TimeTextBlock" HorizontalAlignment="Left" Margin="131,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14"><Run Text="Permit CSV import after time "/><Run Text="(eg 15:00)"/></TextBlock>
+        <TextBox x:Name="TimeTextBox" HorizontalAlignment="Left" Height="24" Margin="391,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" TextChanged="TimeText_TextChanged" LostFocus="TimeTextBox_LostFocus"/>
+        <TextBlock x:Name="DaysBeforeTextBlock" HorizontalAlignment="Left" Margin="131,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Text="Allow CSV Import 'x' days before"/>
+
+        <TextBox x:Name="DaysBeforeTextBox" HorizontalAlignment="Left" Height="24" Margin="391,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" TextChanged="DaysBeforeText_TextChanged"/>
+        <Button x:Name="FolderButton" Content="Import Folder" HorizontalAlignment="Left" Margin="87,208,0,0" VerticalAlignment="Top" Width="135" FontSize="14" Click="ImportFolderButton_Click"/>
+        <Label x:Name="FolderLabel" Content="Folder: " HorizontalAlignment="Left" Margin="255,207,0,0" VerticalAlignment="Top" Width="277" Background="White" Opacity="0.6"/>
+        <Button x:Name="SavePrefsButton" Content="Save Preferences" HorizontalAlignment="Left" Margin="391,238,0,0" VerticalAlignment="Top" Width="135" Height="30" FontSize="14" Click="SavePrefsButton_Click"/>
+
+
+    </Grid>
+</Window>

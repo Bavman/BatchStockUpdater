@@ -1,0 +1,9 @@
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.Core\bin\Debug\BatchStockUpdater.Core.dll
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.Core\bin\Debug\BatchStockUpdater.Core.pdb
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.Core\obj\Debug\BatchStockUpdater.Core.csprojAssemblyReference.cache
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.Core\obj\Debug\BatchStockUpdater.Core.csproj.CoreCompileInputs.cache
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.Core\obj\Debug\BatchStockUpdater.Core.dll
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.Core\obj\Debug\BatchStockUpdater.Core.pdb
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.Core\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.Core\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.Core\obj\Debug\BatchStockUpdater.Core.csproj.CopyComplete

@@ -1,0 +1,6 @@
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.Application\bin\Debug\BatchStockUpdater.Application.pdb
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.Application\obj\Debug\BatchStockUpdater.Application.csprojAssemblyReference.cache
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.Application\obj\Debug\BatchStockUpdater.Application.csproj.CoreCompileInputs.cache
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.Application\obj\Debug\BatchStockUpdater.Application.pdb
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.Application\bin\Debug\BatchStockUpdater.Application.dll
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.Application\obj\Debug\BatchStockUpdater.Application.dll

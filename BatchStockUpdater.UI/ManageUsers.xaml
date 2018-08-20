@@ -1,0 +1,89 @@
+﻿<Window x:Class="BatchStockUpdater.UI.ManageUsersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BatchStockUpdater.UI"
+        mc:Ignorable="d"
+        Title="ManageUsers" Height="520" Width="800">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <!--<Setter Property="Width" Value="120"/>-->
+            <Setter Property="Height" Value="28"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Width" Value="280"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="360"/>
+            <RowDefinition Height="60*"/>
+        </Grid.RowDefinitions>
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1">
+
+            <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <TextBlock x:Name ="IDTextBlock" Text ="ID" Opacity="0.5"/>
+                <TextBlock x:Name ="NameTextBlock" Text ="UserName"/>
+                <TextBlock x:Name ="PasswordTextBlock" Text ="Password"/>
+                <TextBlock x:Name ="FirstNameTextBlock" Text ="First Name"/>
+                <TextBlock x:Name ="LastNameTextBlock" Text ="Last Name"/>
+                <TextBlock x:Name ="EmailTextBlock" Text ="Email"/>
+                <TextBlock x:Name ="StartDateTextBlock" Text ="StartDate"/>
+                <TextBlock x:Name ="UserTypeTextBlock" Text ="User Type"/>
+                <TextBlock x:Name ="ProtectedUserTextBlock" Text ="Protected User"/>
+                <TextBlock x:Name ="UserInactiveTextBlock" Text ="User Inactive"/>
+            </StackPanel>
+
+        </Border>
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="0">
+            <Button x:Name="NextUserButton" Content ="Next User" Width="70" Height= "30" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" Click="NextUserButton_Click"/>
+        </Border>
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="0">
+            <Button x:Name="PreviousUserButton" Content ="Prev. User" Width="70" Height= "30" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="183,10,97,0" Click="PreviousUserButton_Click"/>
+        </Border>
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1">
+
+            <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <TextBox x:Name ="IDTextBox" Text ="ID" Opacity="0.5" Width="40" IsEnabled="False"/>
+                <TextBox x:Name ="UserNameTextBox" Text ="" LostFocus="UserNameTextBox_LostFocus"/>
+                <TextBox x:Name ="PasswordTextBox" Text ="" LostFocus="PasswordTextBox_LostFocus" Background="White"/>
+                <TextBox x:Name ="FirstNameTextBox" Text ="" LostFocus="FirstNameTextBox_LostFocus"/>
+                <TextBox x:Name ="LastNameTextBox" Text ="" LostFocus="LastNameTextBox_LostFocus"/>
+                <TextBox x:Name ="EmailTextBox" Text ="" LostFocus="EmailTextBox_LostFocus"/>
+                <DatePicker x:Name="StartDateDatePickerTextBox" Width="250" HorizontalAlignment="Left" Margin="4" />
+                <ComboBox x:Name="UserTypeComboBox" Width="200" Height ="28" HorizontalAlignment="Left" Margin="4" />
+                <CheckBox x:Name="ProtectedUserCheckBox" Width="28" Height="28" HorizontalAlignment="Left" Margin="4,12,4,4" VerticalAlignment="Bottom" IsEnabled="False" Checked="ProtectedUserCheckBox_Checked" Unchecked="ProtectedUserCheckBox_Unchecked"/>
+                <CheckBox x:Name="UserInactiveCheckBox" Width="28" Height="28" HorizontalAlignment="Left" Margin="4,6,4,4" VerticalAlignment="Bottom" IsEnabled="False"/>
+            </StackPanel>
+
+        </Border>
+
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="0">
+            <Button x:Name="NewUserButton" Content ="New User" Width="90" Height= "30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,10,10,10" Click="NewUserButton_Click"/>
+        </Border>
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="2">
+            <Button x:Name="RemoveUserButton" Content ="Remove User" Width="90" Height= "30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Click="RemoveUserButton_Click"/>
+        </Border>
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="2">
+            <Button x:Name="UpdateUserButton" Content ="Update User" Width="90" Height= "30" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10" Click="UpdateUserButton_Click"/>
+        </Border>
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="2">
+            <Button x:Name="AddUserButton" Content ="Add User" Width="90" Height= "30" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" Click="AddUserButton_Click" IsEnabled="False"/>
+        </Border>
+    </Grid>
+</Window>
