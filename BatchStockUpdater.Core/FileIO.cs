@@ -116,6 +116,7 @@ namespace BatchStockUpdater.Core
                 streamWriter.WriteLine(stringBuilder);
                 streamWriter.Close();
 
+                Logging.GetInstance().LogExportCSV();
             }
             catch (Exception)
             {

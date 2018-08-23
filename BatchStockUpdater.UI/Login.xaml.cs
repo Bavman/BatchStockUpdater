@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using BatchStockUpdater.Users;
 using BatchStockUpdater.Core;
 
@@ -41,11 +31,11 @@ namespace BatchStockUpdater.UI
         // Check user credentials and enable login if correct credentials
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            LoginCheck(UserNameTextBox.Text, PasswordTextBox.Text);
+            CheckUserCredentials(UserNameTextBox.Text, PasswordTextBox.Text);
         }
 
         // Check the user credentials match and fire LogInApproved in the MainWinow
-        private void LoginCheck(string userNameCheck, string passwordCheck)
+        private void CheckUserCredentials(string userNameCheck, string passwordCheck)
         {
             var userList = _usersRepository.UserList;
             var userListQuery = userList.Where(u => u.UserName.Equals(userNameCheck)).ToArray();

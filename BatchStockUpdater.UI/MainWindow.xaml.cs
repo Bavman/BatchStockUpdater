@@ -1,19 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using BatchStockUpdater.Core;
-using Microsoft.VisualBasic.FileIO;
 using System.Data;
 using BatchStockUpdater.Users;
 using System.Diagnostics;
@@ -73,6 +63,7 @@ namespace BatchStockUpdater.UI
             _prefs.LoadPrefs();
 
             _dataMethods = DataMethods.GetInstance();
+            _manageUserWindow = new ManageUsersWindow(_userRepository);
 
             _loginWindow = new LoginWindow(this, _userRepository);
             _preferncesWindow = new PreferencesWindow();
@@ -173,7 +164,6 @@ namespace BatchStockUpdater.UI
             else
             {
                 _csvFileIO.SaveCSV(_prefs.FilePath, _csvDataTable);
-                _logging.LogExportCSV();
             }  
         }
 
@@ -186,7 +176,6 @@ namespace BatchStockUpdater.UI
 
         private void ManageUsersButton_Click(object sender, RoutedEventArgs e)
         {
-            _manageUserWindow = new ManageUsersWindow(_userRepository);
             _manageUserWindow.Show();
         }
 
@@ -224,7 +213,7 @@ namespace BatchStockUpdater.UI
         }
 
         // Setup DataGrid and connect _csvDataTable to DataGrid
-        void SetupDataGrid(DataTable dataTable)
+        private void SetupDataGrid(DataTable dataTable)
         {
 
             _csvDataGrid = CSVDataGrid;
