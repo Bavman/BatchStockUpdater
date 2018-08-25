@@ -306,7 +306,6 @@ namespace BatchStockUpdater.UI
             Console.WriteLine("Int List " + _csvCurrentCountsImport[row.GetIndex()]);
         }
 
-
     }
 
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 
-namespace BatchStockUpdater.Users
+namespace BatchStockUpdater.Core
 {
     public class ReturnADataTable
     {
@@ -18,7 +18,7 @@ namespace BatchStockUpdater.Users
         };
 
 
-        public DataTable ReturnTestDataTable()
+        public DataTable TestDataTable()
         {
             var dataTable = new DataTable();
 

@@ -27,7 +27,6 @@ namespace BatchStockUpdater.Core
         public TextFieldParser LoadCSV(string filePath, bool checkHeader, bool isCheckDateTime = false, bool displayFileExistsMessage = false)
         {
             var doesFileExist = CheckFilePath(filePath);
-            
 
             if (!doesFileExist)
             {
@@ -41,7 +40,7 @@ namespace BatchStockUpdater.Core
             // Check that imported CSV meets the date time requirements in preferences
             if (isCheckDateTime)
             {
-                if (!DoesFileDateCheckPass(filePath, CheckFileDateTime()))
+                if (!IsFileDateModifiedCurrent(filePath, CheckFileDateTime()))
                 {
                     MessageBox.Show("CSV file to be imported is older than expected. \nPlease check the file " +
                         "is recent or adjust the time and days settings in preferences");
@@ -56,7 +55,7 @@ namespace BatchStockUpdater.Core
 
             if (checkHeader)
             {
-                returnCSVData = VerifyHearderRow(csvData, CSVHeaders);
+                returnCSVData = ChechHearderRow(csvData, CSVHeaders);
             }
             else
             {
@@ -77,15 +76,18 @@ namespace BatchStockUpdater.Core
         }
 
         // Write CSV DataTable to csv text file
-        public void SaveCSV(string filePath, DataTable dataTable)
+        public bool SaveCSV(string filePath, DataTable dataTable)
         {
+
+            var isSaved = false;
+
             var folder = Path.GetDirectoryName(filePath);
             Console.WriteLine(folder);
 
             if (!Directory.Exists(folder))
             {
                 MessageBox.Show("Destination folder does not exist. Please check the preferences and try again.");
-                return;
+                return false;
             }
 
             try
@@ -116,19 +118,22 @@ namespace BatchStockUpdater.Core
                 streamWriter.WriteLine(stringBuilder);
                 streamWriter.Close();
 
+                isSaved = true;
+
                 Logging.GetInstance().LogExportCSV();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw new ArgumentException(@"Cannot write to c:\. Try running program as Administrator");
+                Console.WriteLine(ex.Message);
+                MessageBox.Show(@"Cannot save to C:\. Will have to run the application as administrator");
+                //throw new ArgumentException(@"Cannot write to c:\. Try running program as Administrator");
             }
 
-
+            return isSaved;
         }
 
         // Checks if the file modified date and time if before the date and time in preferences
-        public bool DoesFileDateCheckPass(string filePath, DateTime checkDateTime)
+        public bool IsFileDateModifiedCurrent(string filePath, DateTime checkDateTime)
         {
             var fileInfo = new FileInfo(filePath);
             var fileDateModified = fileInfo.LastWriteTime;
@@ -173,6 +178,7 @@ namespace BatchStockUpdater.Core
         public TextFieldParser ReturnCSVData(string path)
         {
             var fileContents = String.Empty;
+
             var csvParser = new TextFieldParser(path);
 
             csvParser.TextFieldType = FieldType.Delimited;
@@ -182,7 +188,7 @@ namespace BatchStockUpdater.Core
         }
 
         // Checks header row to see if it matches the header row details set in preferences.
-        private bool VerifyHearderRow(TextFieldParser csvData, string[] compareHeader)
+        public bool ChechHearderRow(TextFieldParser csvData, string[] compareHeader)
         {
             var hasPassed = true;
 
@@ -190,6 +196,12 @@ namespace BatchStockUpdater.Core
             {
                 var header = csvData.ReadLine();
                 var headerArray = header.Split(',');
+
+                // Fail if too many header counts
+                if (headerArray.Length != compareHeader.Length)
+                {
+                    return false;
+                }
 
                 for (var i = 0; i < headerArray.Length; i++)
                 {

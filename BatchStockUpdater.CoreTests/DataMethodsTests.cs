@@ -35,7 +35,7 @@ namespace BatchStockUpdater.Core.Tests
             var dataMethods = DataMethods.GetInstance();
             var returnADataTable = new ReturnADataTable();
 
-            var testDataTable = returnADataTable.ReturnTestDataTable();
+            var testDataTable = returnADataTable.TestDataTable();
             Console.WriteLine("DataTable Row Count " + testDataTable.Rows.Count);
 
             //var testCollection = dataMethods.ReturnColumnCollection<string>(testDataTable, _csvHeader[0]);
@@ -82,8 +82,8 @@ namespace BatchStockUpdater.Core.Tests
 
 
             var dataMethods = DataMethods.GetInstance();
-            //var isEqual = dataMethods.CompareCurrentCountsTables<string>(colArray1, testColArray1);
-            var isEqual = dataMethods.CompareCurrentCountsTables<AppUser>(userList1, userList3);
+            var isEqual = dataMethods.CompareCurrentCountsTables<string>(colArray1, testColArray1);
+            //var isEqual = dataMethods.CompareCurrentCountsTables<AppUser>(userList1, userList3);
 
             Assert.AreEqual(isEqual, true);
         }

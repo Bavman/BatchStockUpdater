@@ -55,7 +55,7 @@ namespace BatchStockUpdater.Core
         }
 
         private string _fileName = "stocklist.CSV";
-        private string FileName
+        public string FileName
         {
             get { return _me._fileName; }
             set { _me._fileName = value; }
@@ -81,14 +81,29 @@ namespace BatchStockUpdater.Core
         }
 
         // Load prefs.json file and populate class properties
-        public void LoadPrefs()
+        public bool LoadPrefs()
         {
+            var successfulLoad = false;
+
             var serializer = new JsonSerializer();
             var prefsJsonPath = (Application.UserAppDataPath) + @"\prefs.Json";
+
+
             if (File.Exists(prefsJsonPath))
             {
                 var file = File.OpenText(prefsJsonPath);
-                var loadedPrefs = (Prefs)serializer.Deserialize(file, typeof(Prefs));
+
+                var loadedPrefs = new Prefs();
+
+                try
+                {
+                    loadedPrefs = (Prefs)serializer.Deserialize(file, typeof(Prefs));
+                }
+                catch (Exception)
+                {
+
+                    throw new FormatException();
+                }
 
                 _me.CheckFileDateAndTime = loadedPrefs.CheckFileDateAndTime;
                 _me.TimeCheck = loadedPrefs.TimeCheck;
@@ -96,14 +111,20 @@ namespace BatchStockUpdater.Core
                 _me.FileName = loadedPrefs.FileName;
                 _me.FolderName = loadedPrefs.FolderName;
 
+
                 file.Close();
+
+                successfulLoad = true;
             }
             else
             {
-                MessageBox.Show("Preferences file missing from " + (Application.UserAppDataPath) + "./n Will be using default settings");
+                MessageBox.Show("Preferences file missing.\n Will be using default settings");
                 _me.SavePrefs();
+
+                successfulLoad = false;
             }
-            
+
+            return successfulLoad;
         }
 
     }

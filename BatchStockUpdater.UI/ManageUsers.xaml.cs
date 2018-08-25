@@ -13,7 +13,7 @@ namespace BatchStockUpdater.UI
     public partial class ManageUsersWindow : Window
     {
 
-        IUsersRepository _userRepository;
+        private IUsersRepository _userRepository;
         private Logging _logging;
         private int _currentUserID;
         private IFormatProvider provider;
