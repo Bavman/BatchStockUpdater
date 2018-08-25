@@ -53,7 +53,7 @@ namespace BatchStockUpdater.Core
 
             var entry = (currentDateTime.ToString() + ", Application started");
 
-            WriteToEntryLogFIle(_me._sessionLogFilePath, entry);
+            WriteEntryToLogFIle(_me._sessionLogFilePath, entry);
 
         }
 
@@ -64,7 +64,7 @@ namespace BatchStockUpdater.Core
 
             var entry = (currentDateTime.ToString() + ", Application closed");
 
-            WriteToEntryLogFIle(_me._sessionLogFilePath, entry);
+            WriteEntryToLogFIle(_me._sessionLogFilePath, entry);
         }
 
         // Log Login 
@@ -87,7 +87,7 @@ namespace BatchStockUpdater.Core
 
             var entry = (currentDateTime.ToString() + ", " + userName + " " + status + " log in");
 
-            WriteToEntryLogFIle(_me._sessionLogFilePath, entry);
+            WriteEntryToLogFIle(_me._sessionLogFilePath, entry);
         }
 
         // Log Logout 
@@ -98,7 +98,7 @@ namespace BatchStockUpdater.Core
 
             var entry = (currentDateTime.ToString() + ", " + userName + " logged out");
 
-            WriteToEntryLogFIle(_me._sessionLogFilePath, entry);
+            WriteEntryToLogFIle(_me._sessionLogFilePath, entry);
         }
 
         // Log Add User 
@@ -109,7 +109,7 @@ namespace BatchStockUpdater.Core
 
             var entry = (currentDateTime.ToString() + ", " + userName + " added");
 
-            WriteToEntryLogFIle(_me._sessionLogFilePath, entry);
+            WriteEntryToLogFIle(_me._sessionLogFilePath, entry);
         }
 
         // Log Delete User
@@ -120,7 +120,7 @@ namespace BatchStockUpdater.Core
 
             var entry = (currentDateTime.ToString() + ", " + userName + " added");
 
-            WriteToEntryLogFIle(_me._sessionLogFilePath, entry);
+            WriteEntryToLogFIle(_me._sessionLogFilePath, entry);
         }
 
         // Log Update User
@@ -131,7 +131,7 @@ namespace BatchStockUpdater.Core
 
             var entry = (currentDateTime.ToString() + ", " + userName + " added");
 
-            WriteToEntryLogFIle(_me._sessionLogFilePath, entry);
+            WriteEntryToLogFIle(_me._sessionLogFilePath, entry);
         }
 
         // Log Import CSV
@@ -155,7 +155,7 @@ namespace BatchStockUpdater.Core
 
             var entry = (currentDateTime.ToString() + ", " + status + " stocklist.csv");
 
-            WriteToEntryLogFIle(_me._sessionLogFilePath, entry);
+            WriteEntryToLogFIle(_me._sessionLogFilePath, entry);
         }
 
         // Log Export CSV
@@ -166,11 +166,11 @@ namespace BatchStockUpdater.Core
 
             var entry = (currentDateTime.ToString() + ", Successfully exported stocklist.csv");
 
-            WriteToEntryLogFIle(_me._sessionLogFilePath, entry);
+            WriteEntryToLogFIle(_me._sessionLogFilePath, entry);
         }
 
         // Write entry to current log file
-        private void WriteToEntryLogFIle(string path, string logEntry)
+        private void WriteEntryToLogFIle(string path, string logEntry)
         {
             var streamWriter = new StreamWriter(path, append: true);
             streamWriter.WriteLine(logEntry);

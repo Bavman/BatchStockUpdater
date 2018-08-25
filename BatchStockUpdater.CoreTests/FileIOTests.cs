@@ -72,7 +72,7 @@ namespace BatchStockUpdater.Core.Tests
 
             Console.WriteLine("Path: {0}", csvFilePath);
             Console.WriteLine("File Modified: {0}", fileDateModified);
-            Console.WriteLine("Set Date Time Check " + checkDateTime);
+            Console.WriteLine("Set Date Time Check {0}", checkDateTime);
 
             var fileIO = new FileIO();
             var isOK = fileIO.IsFileDateModifiedCurrent(csvFilePath, checkDateTime);

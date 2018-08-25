@@ -24,13 +24,13 @@ namespace BatchStockUpdater.Core
         public string[] CSVHeaders;
 
         // Load CSV and return data as a TextFieldParser object
-        public TextFieldParser LoadCSV(string filePath, bool checkHeader, bool isCheckDateTime = false, bool displayFileExistsMessage = false)
+        public TextFieldParser LoadCSV(string filePath, bool checkHeader, bool isCheckDateTime = false, bool showFileExistsMessage = false)
         {
             var doesFileExist = CheckFilePath(filePath);
 
             if (!doesFileExist)
             {
-                if (displayFileExistsMessage)
+                if (showFileExistsMessage)
                 {
                     MessageBox.Show("Coul not find " + filePath + " Please check the file location and try again.");
                 }
@@ -42,8 +42,6 @@ namespace BatchStockUpdater.Core
             {
                 if (!IsFileDateModifiedCurrent(filePath, CheckFileDateTime()))
                 {
-                    MessageBox.Show("CSV file to be imported is older than expected. \nPlease check the file " +
-                        "is recent or adjust the time and days settings in preferences");
                     return null;
                 }
             }
@@ -92,31 +90,7 @@ namespace BatchStockUpdater.Core
 
             try
             {
-                var streamWriter = new StreamWriter(filePath);
-
-                var rows = dataTable.Rows;
-
-                var stringBuilder = new StringBuilder();
-
-                // Collect column names and add to string builder
-                var colNames = dataTable.Columns.Cast<DataColumn>().
-                    Select(column => column.ColumnName).
-                    ToArray();
-
-                stringBuilder.AppendLine(string.Join(",", colNames));
-
-
-                // Loop through DataTable rows
-                for (var i = 0; i < rows.Count; i++)
-                {
-                    var rowFields = rows[i].ItemArray.
-                        Select(field => field.ToString()).ToArray();
-
-                    stringBuilder.AppendLine(string.Join(",", rowFields));
-                }
-
-                streamWriter.WriteLine(stringBuilder);
-                streamWriter.Close();
+                WriteDataTableToFile(filePath, dataTable);
 
                 isSaved = true;
 
@@ -125,11 +99,41 @@ namespace BatchStockUpdater.Core
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                MessageBox.Show(@"Cannot save to C:\. Will have to run the application as administrator");
+                MessageBox.Show(@"Cannot save to C:\. Will have to run the application as Administrator");
                 //throw new ArgumentException(@"Cannot write to c:\. Try running program as Administrator");
             }
 
             return isSaved;
+        }
+
+        // Write DataTable to csv file with StreamWriter
+        private static void WriteDataTableToFile(string filePath, DataTable dataTable)
+        {
+            var streamWriter = new StreamWriter(filePath);
+
+            var rows = dataTable.Rows;
+
+            var stringBuilder = new StringBuilder();
+
+            // Collect column names and add to string builder
+            var colNames = dataTable.Columns.Cast<DataColumn>().
+                Select(column => column.ColumnName).
+                ToArray();
+
+            stringBuilder.AppendLine(string.Join(",", colNames));
+
+
+            // Loop through DataTable rows
+            for (var i = 0; i < rows.Count; i++)
+            {
+                var rowFields = rows[i].ItemArray.
+                    Select(field => field.ToString()).ToArray();
+
+                stringBuilder.AppendLine(string.Join(",", rowFields));
+            }
+
+            streamWriter.WriteLine(stringBuilder);
+            streamWriter.Close();
         }
 
         // Checks if the file modified date and time if before the date and time in preferences
@@ -142,6 +146,8 @@ namespace BatchStockUpdater.Core
 
             if (dateTimeCompare < 0)
             {
+                MessageBox.Show("CSV file to be imported is older than expected. \nPlease check the file " +
+                        "is recent or adjust the time and days settings in preferences");
                 return false;
             }
             return true;

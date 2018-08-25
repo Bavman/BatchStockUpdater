@@ -47,7 +47,7 @@ namespace BatchStockUpdater.Core
             set { _me._timeCheck = value; }
         }
 
-        private string _folederName = @"C:\CertIV";
+        private string _folederName = @"C:\";
         public string FolderName
         {
             get { return _me._folederName; }
@@ -110,7 +110,6 @@ namespace BatchStockUpdater.Core
                 _me.NDaysBefore = loadedPrefs.NDaysBefore;
                 _me.FileName = loadedPrefs.FileName;
                 _me.FolderName = loadedPrefs.FolderName;
-
 
                 file.Close();
 
