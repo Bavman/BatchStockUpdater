@@ -32,16 +32,26 @@ namespace BatchStockUpdater.Core
 
             var csvDataTable = SetupDataTable(new DataTable(), csvHeader);
 
+            var maxCount = 5000;
+            var count = 0;
             // Loop through CSV Data to populate DataTable fields
             while (!csvData.EndOfData)
             {
-                try
+                count++;
+
+                // Break after maxCount
+                if (count > maxCount)
                 {
-                    fields = csvData.ReadFields();
+                    break;
                 }
-                catch (Exception)
+
+                fields = csvData.ReadFields();
+
+                // Fail if the fields array length is not the same as the csvHeader array length.
+                if (fields.Length != csvHeader.Length)
                 {
-                    throw;
+                    MessageBox.Show("A line in the CSV has a different field count to what was expected. Cannot import csv");
+                    return null;
                 }
 
                 // Avoid processing header row
@@ -52,6 +62,7 @@ namespace BatchStockUpdater.Core
 
                     row[csvHeader[0]] = fields[0];
                     row[csvHeader[1]] = fields[1];
+
                     var intCheck = Int32.TryParse(fields[2], out var field2);
                     if (intCheck)
                     {
@@ -65,7 +76,6 @@ namespace BatchStockUpdater.Core
                     row[csvHeader[3]] = fields[3];
 
                     csvDataTable.Rows.Add(row);
-
                 }
 
             }

@@ -11,12 +11,14 @@ namespace BatchStockUpdater.Core.Tests
     [TestClass()]
     public class PrefsTests
     {
+
+        // Checks successful load of the prefs.json file.
         [TestMethod()]
         public void LoadPrefsTest()
         {
-            var didPrefsJsonLoadSuccessfully = Prefs.GetInstance().LoadPrefs();
+            var isSuccessfulPrefsLoad = Prefs.GetInstance().LoadPrefs();
 
-            Assert.AreEqual(didPrefsJsonLoadSuccessfully, true);
+            Assert.AreEqual(isSuccessfulPrefsLoad, true);
         }
     }
 }

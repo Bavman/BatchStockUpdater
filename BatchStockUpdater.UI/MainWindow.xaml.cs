@@ -114,15 +114,19 @@ namespace BatchStockUpdater.UI
                 if (csvData != null)
                 {
                     _csvDataTable = _dataMethods.PopulateDataTable(csvData, _csvHeader);
-                    _csvDataGrid.ItemsSource = _csvDataTable.DefaultView;
-                    SetDataGridWidths();
 
-                    //Make a new collection of the 'Current Count' to check on export of csv
-                    _csvCurrentCountsImport = _dataMethods.ReturnColumnCollection<int>(_csvDataTable, _csvHeader[2]).ToList();
+                    if (_csvDataTable != null)
+                    {
+                        _csvDataGrid.ItemsSource = _csvDataTable.DefaultView;
+                        SetDataGridWidths();
 
-                    _isDataTableImported = true;
-                    ExportCSVButton.IsEnabled = true;
-                    _logging.LogImportCSV(FailSuccessStatus.Success);
+                        //Make a new collection of the 'Current Count' to check on export of csv
+                        _csvCurrentCountsImport = _dataMethods.ReturnColumnCollection<int>(_csvDataTable, _csvHeader[2]).ToList();
+
+                        _isDataTableImported = true;
+                        ExportCSVButton.IsEnabled = true;
+                        _logging.LogImportCSV(FailSuccessStatus.Success);
+                    }
                 }
                 else
                 {

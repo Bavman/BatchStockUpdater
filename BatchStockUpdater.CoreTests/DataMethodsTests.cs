@@ -27,7 +27,8 @@ namespace BatchStockUpdater.Core.Tests
         int[] colArray3 = new int[] { 4, 20, 10, 3 };
         string[] colArray4 = new string[] { "No", "No", "Yes", "No" };
 
-
+        // Tests collection returned by the method ReturnColumnCollection against the above local array variables.
+        // This method can be used to store imported columns from the stocklist.csv file for later comparison.
         [TestMethod()]
         public void ReturnColumnCollectionTest()
         {
@@ -64,11 +65,12 @@ namespace BatchStockUpdater.Core.Tests
             //Assert.AreEqual(4, testCollection.Count);
         }
 
+        // Checks reference against primitive variables
         [TestMethod()]
         public void CompareCurrentCountsTablesTest()
         {
             // Class Lists for testing
-            var user1 = new AppUser { UserName = "Frank", Password = "Hey1"};
+            var user1 = new AppUser { UserName = "Frank", Password = "Hey1" };
             var user2 = new AppUser { UserName = "Bob", Password = "Hey2" };
 
             var userList1 = new List<AppUser> { user1, user2 };
@@ -86,6 +88,32 @@ namespace BatchStockUpdater.Core.Tests
             //var isEqual = dataMethods.CompareCurrentCountsTables<AppUser>(userList1, userList3);
 
             Assert.AreEqual(isEqual, true);
+        }
+
+
+        [TestMethod()]
+        public void PopulateDataTableTest()
+        {
+            var csvFilePath = @"C:\stocklist.CSV";
+
+            var fileIO = new FileIO();
+
+            var textFieldParser = fileIO.ReturnCSVData(csvFilePath);
+
+            var dataTabe = DataMethods.GetInstance().PopulateDataTable(textFieldParser, _csvHeader);
+
+            var rowCount = dataTabe.Rows.Count;
+
+            var columnCount = dataTabe.Columns.Count;
+
+            var rowColumnIntArray = new int[] { rowCount, columnCount };
+
+            var compareIntArray = new int[] { 40, 4 };
+
+            Console.WriteLine("Row count {0}",rowCount);
+            Console.WriteLine("Column count {0}", columnCount);
+
+            CollectionAssert.AreEqual(rowColumnIntArray, compareIntArray);
         }
     }
 }

@@ -49,28 +49,27 @@ namespace BatchStockUpdater.Core
             // Retrieve CSV TextFieldParser object
             var csvData = ReturnCSVData(filePath);
 
-            var returnCSVData = false;
-
+            // If 'checkHeader' bool is requested the header of the CSV is checked.
+            // Either the TextFieldParser object is returned if successful or a null if not.
             if (checkHeader)
             {
-                returnCSVData = ChechHearderRow(csvData, CSVHeaders);
-            }
-            else
-            {
-                returnCSVData = true;
-            }
+                var isCSVHeaderOK = ChechHearderRow(csvData, CSVHeaders);
 
-            // Return CSV string or fail and return null
-            if (returnCSVData)
-            {
-                return ReturnCSVData(filePath);
+                if (isCSVHeaderOK)
+                {
+                    return csvData;
+                }
+                else
+                {
+                    MessageBox.Show("CSV header row did not pass the comparison check.");
+                    return null;
+                }
             }
             else
             {
-                MessageBox.Show("CSV header row did not pass the comparison check.");
-                return null;
+                return csvData;
             }
-               
+ 
         }
 
         // Write CSV DataTable to csv text file
@@ -201,7 +200,18 @@ namespace BatchStockUpdater.Core
             if (csvData != null)
             {
                 var header = csvData.ReadLine();
-                var headerArray = header.Split(',');
+
+                var headerArray = new string[0];
+
+                // Check file contains characters
+                if (header != null)
+                {
+                    headerArray = header.Split(',');
+                }
+                else
+                {
+                    return false;
+                }
 
                 // Fail if too many header counts
                 if (headerArray.Length != compareHeader.Length)
