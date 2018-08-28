@@ -316,6 +316,7 @@ namespace BatchStockUpdater.UI
             StartDateDatePickerTextBox.Text = date.ToShortDateString();
             UserTypeComboBox.Text = "Staff";
             ProtectedUserCheckBox.IsChecked = false;
+            UserInactiveCheckBox.IsChecked = false;
         }
 
         // Update UI input fields from the AppUser class
