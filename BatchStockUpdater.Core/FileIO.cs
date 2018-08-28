@@ -79,7 +79,6 @@ namespace BatchStockUpdater.Core
             var isSaved = false;
 
             var folder = Path.GetDirectoryName(filePath);
-            Console.WriteLine(folder);
 
             if (!Directory.Exists(folder))
             {
@@ -106,7 +105,7 @@ namespace BatchStockUpdater.Core
         }
 
         // Write DataTable to csv file with StreamWriter
-        private static void WriteDataTableToFile(string filePath, DataTable dataTable)
+        private void WriteDataTableToFile(string filePath, DataTable dataTable)
         {
             var streamWriter = new StreamWriter(filePath);
 

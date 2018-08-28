@@ -17,7 +17,7 @@ namespace BatchStockUpdater.Core
             "On Order"
         };
 
-
+        // Returns a DataTable object with the _csvHeader as header and the following rowArray data as rows.
         public DataTable TestDataTable()
         {
             var dataTable = new DataTable();
@@ -40,6 +40,7 @@ namespace BatchStockUpdater.Core
             return dataTable;
         }
 
+        // Returns a DataTable DataRow object popualted from the string arrays rowArray csvHeader
         private DataRow ReturnDataRow(DataRow row, string[] rowArray, string[] csvHeader)
         {
 
@@ -49,7 +50,6 @@ namespace BatchStockUpdater.Core
             row[csvHeader[3]] = rowArray[3];
 
             return row;
-
         }
 
         // Setup columns for DataTable object

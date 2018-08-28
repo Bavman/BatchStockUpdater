@@ -100,9 +100,10 @@ namespace BatchStockUpdater.UI
             _isDataTableImported = false;
             EnableButtons(false);
             ClearDataTable();
-            CurrentUserName = String.Empty;
             LoginButton.IsEnabled = true;
             _logging.LogLogOut(CurrentUserName);
+
+            CurrentUserName = String.Empty;
         }
 
         private void ImportCSVButton_Click(object sender, RoutedEventArgs e)

@@ -14,6 +14,9 @@ namespace BatchStockUpdater.UI
         IUsersRepository _usersRepository;
         MainWindow _mainWindow;
         Logging _logging;
+        private bool _useAdminCreds;
+
+
         // Initialize Window and assign variables
         public LoginWindow(MainWindow mainWindow, IUsersRepository usersRepository)
         {
@@ -24,8 +27,13 @@ namespace BatchStockUpdater.UI
             _logging = Logging.GetInstance();
 
             // Auto Login
-            UserNameTextBox.Text = "Admin";
-            PasswordTextBox.Text = "Passw0rd";
+            _useAdminCreds = false;
+
+            if (_useAdminCreds)
+            {
+                UserNameTextBox.Text = "Admin";
+                PasswordTextBox.Text = "Passw0rd";
+            }
         }
 
         // Check user credentials and enable login if correct credentials
@@ -54,7 +62,12 @@ namespace BatchStockUpdater.UI
 
                     _logging.LogLogin(userNameCheck, FailSuccessStatus.Success);
 
-                    ClearUserNameAndPasswordTextBoxes();
+
+                    if (!_useAdminCreds)
+                    {
+                        ClearUserNameAndPasswordTextBoxes();
+                    }
+                    
 
                     this.Close();
                 }
