@@ -50,10 +50,15 @@ namespace BatchStockUpdater.UI
 
             if (userListQuery.Length > 0)
             {
+                // Inactive User
                 if (userListQuery[0].Inactive)
                 {
+                    FailedLoginMessage();
+                    _logging.LogLogin(userNameCheck, FailSuccessStatus.Failure);
                     return;
                 }
+
+                // Successful credentials or not
                 if (userListQuery[0].Password == passwordCheck)
                 {
                     _mainWindow.CurrentUserName = userNameCheck;
@@ -68,7 +73,6 @@ namespace BatchStockUpdater.UI
                         ClearUserNameAndPasswordTextBoxes();
                     }
                     
-
                     this.Close();
                 }
                 else
