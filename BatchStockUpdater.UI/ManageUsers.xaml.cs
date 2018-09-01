@@ -21,11 +21,6 @@ namespace BatchStockUpdater.UI
         private AppUser _newUser;
 
         private bool _isAddingNewUser = false;
-        private bool _isUserNameOK = true;
-        private bool _isPasswordOK = true;
-        private bool _isFirstNameOK = true;
-        private bool _isLastNameOK = true;
-        private bool _isEmailOK = true;
 
         // Initialize Window and assign variables
         public ManageUsersWindow(IUsersRepository userRepository)
@@ -220,6 +215,7 @@ namespace BatchStockUpdater.UI
 
         #endregion
 
+
         // Updates TextBoxes when adding new users
         private void NewUserTextBoxLostFocus(TextBox inputBox)
         {
@@ -232,57 +228,82 @@ namespace BatchStockUpdater.UI
 
             if (_isAddingNewUser)
             {
-                _newUser.UserName = inputBox.Text;
 
-                _isUserNameOK = ColourTextCells(inputBox, _newUser.UserName);
+                var returnField = String.Empty;
+
+                switch (inputBox.Name)
+                {
+
+                    case "UserNameTextBox":
+                        _newUser.UserName = inputBox.Text;
+                        returnField = _newUser.UserName;
+                        break;
+                    case "PasswordTextBox":
+                        _newUser.Password = inputBox.Text;
+                        returnField = _newUser.Password;
+                        break;
+                    case "FirstNameTextBox":
+                        _newUser.FirstName = inputBox.Text;
+                        returnField = _newUser.FirstName;
+                        break;
+                    case "LastNameTextBox":
+                        _newUser.LastName = inputBox.Text;
+                        returnField = _newUser.LastName;
+                        break;
+                    case "EmailTextBox":
+                        _newUser.Email = inputBox.Text;
+                        returnField = _newUser.Email;
+                        break;
+                }
+
+                ColourTextCells(inputBox, returnField);
             }
         }
 
         // Colour TextBox bacgrounds based on complient text input
-        private bool ColourTextCells(TextBox textBox, string textBoxString)
+        private void ColourTextCells(TextBox textBox, string textBoxString)
         {
             if (textBoxString != null)
             {
                 textBox.Background = new SolidColorBrush(Color.FromArgb(255, 127, 255, 127));
-                return true;
             }
             else
             {
                 textBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127));
-                return false;
             }
         }
 
         private bool CheckUserFields(AppUser appUser)
         {
-            
+            var isValid = true; 
+
             if (appUser.UserName == null || appUser.UserName == String.Empty)
             {
                 UserNameTextBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127));
-                return false;
+                isValid = false;
             }
             if (appUser.Password == null || appUser.Password == String.Empty)
             {
                 PasswordTextBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127));
-                return false;
+                isValid = false;
             }
             if (appUser.FirstName == null || appUser.FirstName == String.Empty)
             {
                 FirstNameTextBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127));
-                return false;
+                isValid = false;
             }
             if (appUser.LastName == null || appUser.LastName == String.Empty)
             {
                 LastNameTextBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127));
-                return false;
+                isValid = false;
             }
             if (appUser.Email == null)
             {
                 EmailTextBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127));
-                return false;
+                isValid = false;
             }
 
-            return true;
+            return isValid;
         }
 
         // Hide instead of close the window - allows the window to be reopened again
