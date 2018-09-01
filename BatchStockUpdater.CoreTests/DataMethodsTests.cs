@@ -34,7 +34,7 @@ namespace BatchStockUpdater.Core.Tests
         {
 
             var dataMethods = DataMethods.GetInstance();
-            var returnADataTable = new ReturnADataTable();
+            var returnADataTable = new ReturnADataTable_ForTesting();
 
             var testDataTable = returnADataTable.TestDataTable();
             Console.WriteLine("DataTable Row Count " + testDataTable.Rows.Count);

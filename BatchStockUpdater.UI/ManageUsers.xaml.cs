@@ -4,6 +4,7 @@ using System.Windows.Media;
 using BatchStockUpdater.Users;
 using BatchStockUpdater.Core;
 using System.Text.RegularExpressions;
+using System.Windows.Controls;
 
 namespace BatchStockUpdater.UI
 {
@@ -14,11 +15,12 @@ namespace BatchStockUpdater.UI
     {
 
         private IUsersRepository _userRepository;
-        private Logging _logging;
         private int _currentUserID;
-        private IFormatProvider provider;
+        private IFormatProvider _provider;
 
-        private bool _isAddingNewUser = true;
+        private AppUser _newUser;
+
+        private bool _isAddingNewUser = false;
         private bool _isUserNameOK = true;
         private bool _isPasswordOK = true;
         private bool _isFirstNameOK = true;
@@ -30,7 +32,6 @@ namespace BatchStockUpdater.UI
         {
             InitializeComponent();
             _userRepository = userRepository;
-            _logging = Logging.GetInstance();
             InitializeUI();
         }
 
@@ -47,6 +48,11 @@ namespace BatchStockUpdater.UI
             
             EnableNewUserButtons(false);
             ResetBackgroundColours();
+
+            _newUser = new AppUser()
+            {
+                ID = _currentUserID
+            };
         }
 
         private void NextUserButton_Click(object sender, RoutedEventArgs e)
@@ -76,7 +82,7 @@ namespace BatchStockUpdater.UI
 
             if (_currentUserID != 0)
             {
-                _logging.LogDeleteUser(_userRepository.ReturnUser(_currentUserID).UserName);
+                Logging.GetInstance().LogDeleteUser(_userRepository.ReturnUser(_currentUserID).UserName);
 
                 _userRepository.DeleteUser(_currentUserID);
                 
@@ -90,19 +96,53 @@ namespace BatchStockUpdater.UI
 
         private void UpdateUserButton_Click(object sender, RoutedEventArgs e)
         {
+
+            var updateUser = AssignPropsToUserClass();
+
             // Check following fields are correct
-            if (_isAddingNewUser && _isUserNameOK &&_isPasswordOK && _isFirstNameOK && _isLastNameOK &&_isEmailOK)
+            if (CheckUserFields(updateUser))
             {
-                _userRepository.UpdateUser(AssignPropsToUserClass());
+                _userRepository.UpdateUser(updateUser);
                 ResetBackgroundColours();
-                _logging.LogAddUser(UserNameTextBox.Text);
+                Logging.GetInstance().LogAddUser(UserNameTextBox.Text);
+                MessageBox.Show("User details updated.");
             }
+            else
+            {
+                MessageBox.Show("User details have not been updated.");
+            }
+            
         }
 
         private void AddUserButton_Click(object sender, RoutedEventArgs e)
         {
             if (_isAddingNewUser)
             {
+                if (CheckUserFields(_newUser))
+                {
+                    if (_userRepository.DoesUserExist(UserNameTextBox.Text))
+                    {
+                        MessageBox.Show("User name already exists, please try a different user name");
+                        return;
+                    }
+
+                    var newAppUser = AssignPropsToUserClass();
+
+                    if (newAppUser == null)
+                    {
+                        return;
+                    }
+
+                    _userRepository.AddUser(newAppUser);
+                    Logging.GetInstance().LogAddUser(newAppUser.UserName);
+
+                    _currentUserID = _userRepository.ReturnLastUserID() - 1;
+                    _isAddingNewUser = false;
+                    EnableNewUserButtons(true);
+                    ResetBackgroundColours();
+                    EnableProtectedUserCheckBox();
+                }
+                /*
                 if (_isAddingNewUser && _isUserNameOK && _isPasswordOK && _isFirstNameOK && _isLastNameOK && _isEmailOK)
                 {
                     if (_userRepository.DoesUserExist(UserNameTextBox.Text))
@@ -119,14 +159,14 @@ namespace BatchStockUpdater.UI
                     }
 
                     _userRepository.AddUser(newAppUser);
-                    _logging.LogAddUser(newAppUser.UserName);
+                    Logging.GetInstance().LogAddUser(newAppUser.UserName);
 
                     _currentUserID = _userRepository.ReturnLastUserID()-1;
                     _isAddingNewUser = false;
                     EnableNewUserButtons(true);
                     ResetBackgroundColours();
                     EnableProtectedUserCheckBox();
-                }
+                }*/
             }
         }
 
@@ -155,109 +195,95 @@ namespace BatchStockUpdater.UI
         // Checks the textbox input field matches the string requirements for the text fields.
         private void UserNameTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            var inputBox = UserNameTextBox;
-
-            if (inputBox.Text == String.Empty)
-            {
-                return;
-            }
-
-            var isValid = CheckFields(inputBox.Text, @"^[a-zA-Z0-9_]+$", @"can contain upper and lower case letters, numbers and _", "User Name");
-            if (isValid)
-            {
-                inputBox.Background = new SolidColorBrush(Color.FromArgb(255, 127, 255, 127));
-            }
-            else
-            {
-                inputBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127));
-            }
-            _isUserNameOK = isValid;
+            NewUserTextBoxLostFocus(UserNameTextBox);
         }
 
         private void PasswordTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            var inputBox = PasswordTextBox;
-
-            if (inputBox.Text == String.Empty)
-            {
-                return;
-            }
-
-            var isValid = CheckFields(PasswordTextBox.Text, @"^(?=.*\d)(?=.*[a-zA-Z]).{4,12}$", @" must contain at least one letter and one number and has to be between 4-12 characters long", "Password");
-            if (isValid)
-            {
-                inputBox.Background = new SolidColorBrush(Color.FromArgb(255, 127, 255, 127));
-            }
-            else
-            {
-                inputBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127));
-            }
-            _isPasswordOK = isValid;
+            NewUserTextBoxLostFocus(PasswordTextBox);
         }
 
         private void FirstNameTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            var inputBox = FirstNameTextBox;
-
-            if (inputBox.Text == String.Empty)
-            {
-                return;
-            }
-
-            var isValid = CheckFields(inputBox.Text, @"^[a-zA-Z]+$", @"can contain upper and lower case letters, numbers and _", "First Name");
-            if (isValid)
-            {
-                inputBox.Background = new SolidColorBrush(Color.FromArgb(255, 127, 255, 127));
-            }
-            else
-            {
-                inputBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127));
-            }
-            _isFirstNameOK = isValid;
+            NewUserTextBoxLostFocus(FirstNameTextBox);
         }
 
         private void LastNameTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            var inputBox = LastNameTextBox;
-
-            if (inputBox.Text == String.Empty)
-            {
-                return;
-            }
-
-            var isValid = CheckFields(inputBox.Text, @"^[a-zA-Z]+$", @"can contain upper and lower case letters, numbers and _", "Last Name");
-            if (isValid)
-            {
-                inputBox.Background = new SolidColorBrush(Color.FromArgb(255, 127, 255, 127));
-            }
-            else
-            {
-                inputBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127)); 
-            }
-            _isLastNameOK = isValid;
+            NewUserTextBoxLostFocus(LastNameTextBox);
         }
 
         private void EmailTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            var inputBox = EmailTextBox;
+            NewUserTextBoxLostFocus(EmailTextBox);
+        }
+
+        #endregion
+
+        // Updates TextBoxes when adding new users
+        private void NewUserTextBoxLostFocus(TextBox inputBox)
+        {
 
             if (inputBox.Text == String.Empty)
             {
+                inputBox.Background = new SolidColorBrush(Colors.White);
                 return;
             }
 
-            var isValid = CheckFields(inputBox.Text, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", @"must be a valid email address", "Email");
-            if (isValid)
+            if (_isAddingNewUser)
             {
-                inputBox.Background = new SolidColorBrush(Color.FromArgb(255, 127, 255, 127));
+                _newUser.UserName = inputBox.Text;
+
+                _isUserNameOK = ColourTextCells(inputBox, _newUser.UserName);
+            }
+        }
+
+        // Colour TextBox bacgrounds based on complient text input
+        private bool ColourTextCells(TextBox textBox, string textBoxString)
+        {
+            if (textBoxString != null)
+            {
+                textBox.Background = new SolidColorBrush(Color.FromArgb(255, 127, 255, 127));
+                return true;
             }
             else
             {
-                inputBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127));
+                textBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127));
+                return false;
             }
-            _isEmailOK = isValid;
         }
-        #endregion
+
+        private bool CheckUserFields(AppUser appUser)
+        {
+            
+            if (appUser.UserName == null || appUser.UserName == String.Empty)
+            {
+                UserNameTextBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127));
+                return false;
+            }
+            if (appUser.Password == null || appUser.Password == String.Empty)
+            {
+                PasswordTextBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127));
+                return false;
+            }
+            if (appUser.FirstName == null || appUser.FirstName == String.Empty)
+            {
+                FirstNameTextBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127));
+                return false;
+            }
+            if (appUser.LastName == null || appUser.LastName == String.Empty)
+            {
+                LastNameTextBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127));
+                return false;
+            }
+            if (appUser.Email == null)
+            {
+                EmailTextBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127));
+                return false;
+            }
+
+            return true;
+        }
 
         // Hide instead of close the window - allows the window to be reopened again
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
@@ -343,8 +369,7 @@ namespace BatchStockUpdater.UI
         // not just any text.
         private bool CheckFields(string prop, string matchChars, string mustContainMessage, string fieldName)
         {
-            
-            var userName = UserNameTextBox.Text;
+
             var isValid = Regex.IsMatch(prop, matchChars);
             Console.WriteLine(isValid);
             if (!isValid)
@@ -370,7 +395,7 @@ namespace BatchStockUpdater.UI
             user.Email = EmailTextBox.Text;
 
             var date = new DateTime();
-            date = DateTime.ParseExact(StartDateDatePickerTextBox.Text, "d", provider);
+            date = DateTime.ParseExact(StartDateDatePickerTextBox.Text, "d", _provider);
             user.StartDate = date;
             user.UserType = (UserTypeEnum)Enum.Parse(typeof(UserTypeEnum), UserTypeComboBox.Text);
             user.ProtectedUser = (bool)ProtectedUserCheckBox.IsChecked;

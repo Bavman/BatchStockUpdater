@@ -15,16 +15,11 @@ namespace BatchStockUpdater.Core
 
         public FileIO()
         {
-            if (_prefs == null)
-            {
-                _prefs = Prefs.GetInstance();
-            }
+            _prefs = _prefs??Prefs.GetInstance();
         }
 
-        public string[] CSVHeaders;
-
         // Load CSV and return data as a TextFieldParser object
-        public TextFieldParser LoadCSV(string filePath, bool checkHeader, bool isCheckDateTime = false, bool showFileExistsMessage = false)
+        public TextFieldParser LoadCSV(string filePath, string[] csvHeader = null, bool isCheckDateTime = false, bool showFileExistsMessage = false)
         {
             var doesFileExist = CheckFilePath(filePath);
 
@@ -34,6 +29,7 @@ namespace BatchStockUpdater.Core
                 {
                     MessageBox.Show("Coul not find " + filePath + " Please check the file location and try again.");
                 }
+
                 return null;
             }
 
@@ -51,9 +47,9 @@ namespace BatchStockUpdater.Core
 
             // If 'checkHeader' bool is requested the header of the CSV is checked.
             // Either the TextFieldParser object is returned if successful or a null if not.
-            if (checkHeader)
+            if (csvHeader != null)
             {
-                var isCSVHeaderOK = ChechHearderRow(csvData, CSVHeaders);
+                var isCSVHeaderOK = ChechHearderRow(csvData, csvHeader);
 
                 if (isCSVHeaderOK)
                 {

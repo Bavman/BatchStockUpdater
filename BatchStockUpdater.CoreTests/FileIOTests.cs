@@ -27,7 +27,7 @@ namespace BatchStockUpdater.Core.Tests
 
             var fileIO = new FileIO();
 
-            var textFieldParser = fileIO.LoadCSV(csvFilePath, false);
+            var textFieldParser = fileIO.LoadCSV(csvFilePath);
 
             var i = 0;
 
@@ -81,7 +81,7 @@ namespace BatchStockUpdater.Core.Tests
 
             var fileIO = new FileIO();
 
-            var testTextFieldParser = fileIO.LoadCSV(csvFilePath, false);
+            var testTextFieldParser = fileIO.LoadCSV(csvFilePath);
 
             var isHeaderCorrect = fileIO.ChechHearderRow(testTextFieldParser, csvHeader);
 
@@ -127,7 +127,7 @@ namespace BatchStockUpdater.Core.Tests
 
             var fileIO = new FileIO();
 
-            var returnADataTable = new ReturnADataTable();
+            var returnADataTable = new ReturnADataTable_ForTesting();
 
             var testDataTable = returnADataTable.TestDataTable();
 

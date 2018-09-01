@@ -17,10 +17,8 @@ namespace BatchStockUpdater.Core
         //  or return instantiated instance of class
         public static DataMethods GetInstance()
         {
-            if (_me == null)
-            {
-                _me = new DataMethods();
-            }
+
+            _me = _me ?? new DataMethods();
 
             return _me;
         }
@@ -119,7 +117,7 @@ namespace BatchStockUpdater.Core
             return currentCountCollection;
         }
 
-        // Tests Primitive type lists only or memore references.
+        // Tests Primitive type lists only or references Type.
         // Does not test variables within class lists
         public bool CompareCurrentCountsTables<T>(IList<T> originalCollection, IList<T> modifiedCollection)
         {

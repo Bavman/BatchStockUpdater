@@ -9,16 +9,13 @@ namespace BatchStockUpdater.Core
         private static Logging _me = null;
 
         private Logging() { }
-        
+
         // Return new instance of class if not instantiated.
         //  or return instantiated instance of class
         public static Logging GetInstance()
         {
-            if (_me == null)
-            {
-                _me = new Logging();
-            }
-
+            _me = _me ?? new Logging();
+            
             if (!_me._isBooted)
             {
                 _me.LogFolder = (Application.UserAppDataPath) + @"\LogFolder";

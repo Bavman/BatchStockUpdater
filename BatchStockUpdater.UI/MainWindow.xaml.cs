@@ -20,7 +20,6 @@ namespace BatchStockUpdater.UI
         FileIO _csvFileIO;
         Prefs _prefs;
         DataMethods _dataMethods;
-        Logging _logging;
 
         IUsersRepository _userRepository;
 
@@ -51,9 +50,7 @@ namespace BatchStockUpdater.UI
         {
 
             this.Title = "Batch Stock Updater";
-
-            _logging = Logging.GetInstance();
-            _logging.OpenApplication();
+            Logging.GetInstance().OpenApplication();
 
             // Load Users or create administrator user and save user files
             _userRepository = CSVUserRepository.GetInstance();
@@ -67,15 +64,12 @@ namespace BatchStockUpdater.UI
 
             _loginWindow = new LoginWindow(this, _userRepository);
             _preferncesWindow = new PreferencesWindow();
-            
+
             _csvFileIO = new FileIO();
-            _csvFileIO.CSVHeaders = _csvHeader;
-            
+
             InitializeComponent();
 
-            PreferencesButton.Visibility = Visibility.Hidden;
-            ManageUsersButton.Visibility = Visibility.Hidden;
-            LogsButton.Visibility = Visibility.Hidden;
+            HideUIEmementsOnBoot();
 
             // Default DataTable view on boot
             var csvDataTable = new DataTable();
@@ -83,11 +77,13 @@ namespace BatchStockUpdater.UI
             SetupDataGrid(defaultViewDataTable);
         }
 
+
         #region buttons
         // Buttons and objects related to the XAML MainWindow
         private void CSVDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Console.WriteLine("Source" + e.Source.ToString());
+            //Console.WriteLine("Source" + e.Source);
+
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -101,7 +97,7 @@ namespace BatchStockUpdater.UI
             EnableButtons(false);
             ClearDataTable();
             LoginButton.IsEnabled = true;
-            _logging.LogLogOut(CurrentUserName);
+            Logging.GetInstance().LogLogOut(CurrentUserName);
 
             CurrentUserName = String.Empty;
         }
@@ -111,7 +107,7 @@ namespace BatchStockUpdater.UI
             // Prevent multiple populations of DataTable
             if (!_isDataTableImported)
             {
-                var csvData = _csvFileIO.LoadCSV(_prefs.FilePath, true, _prefs.CheckFileDateAndTime, true);
+                var csvData = _csvFileIO.LoadCSV(_prefs.FilePath, _csvHeader, _prefs.CheckFileDateAndTime, true);
                 if (csvData != null)
                 {
                     _csvDataTable = _dataMethods.PopulateDataTable(csvData, _csvHeader);
@@ -126,12 +122,12 @@ namespace BatchStockUpdater.UI
 
                         _isDataTableImported = true;
                         ExportCSVButton.IsEnabled = true;
-                        _logging.LogImportCSV(FailSuccessStatus.Success);
+                        Logging.GetInstance().LogImportCSV(FailSuccessStatus.Success);
                     }
                 }
                 else
                 {
-                    _logging.LogImportCSV(FailSuccessStatus.Failure);
+                    Logging.GetInstance().LogImportCSV(FailSuccessStatus.Failure);
                 }
             }
 
@@ -158,6 +154,7 @@ namespace BatchStockUpdater.UI
                 return;
             }
 
+            // Open Overwrite Query Window or save if file does not exist in path
             if (_csvFileIO.CheckFilePath(_prefs.FilePath))
             {
                 if (_overwriteQueryWindow == null)
@@ -192,6 +189,15 @@ namespace BatchStockUpdater.UI
 
         #endregion
 
+        // Hide MainWindow UI Buttons - defaults for lowest user accessability type
+        private void HideUIEmementsOnBoot()
+        {
+            PreferencesButton.Visibility = Visibility.Hidden;
+            ManageUsersButton.Visibility = Visibility.Hidden;
+            LogsButton.Visibility = Visibility.Hidden;
+        }
+
+        // Enables MainWindow UI Buttons based on user types accessability
         public void LogInApproved(UserTypeEnum userType)
         {
             EnableButtons(true, userType);
@@ -201,7 +207,7 @@ namespace BatchStockUpdater.UI
         // Hide instead of close the window - allows the window to be reopened again
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            _logging.CloseApplication();
+            Logging.GetInstance().CloseApplication();
 
             //e.Cancel = true;
             //this.Hide();

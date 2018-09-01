@@ -51,7 +51,7 @@
     <Compile Include="Logging.cs" />
     <Compile Include="Prefs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReturnADataTable.cs" />
+    <Compile Include="ReturnADataTable_ForTesting.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

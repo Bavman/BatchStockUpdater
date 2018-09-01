@@ -7,7 +7,7 @@ using System.Data;
 
 namespace BatchStockUpdater.Core
 {
-    public class ReturnADataTable
+    public class ReturnADataTable_ForTesting
     {
         string[] _csvHeader = new string[]
         {

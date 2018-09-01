@@ -13,7 +13,6 @@ namespace BatchStockUpdater.UI
     {
         IUsersRepository _usersRepository;
         MainWindow _mainWindow;
-        Logging _logging;
         private bool _useAdminCreds;
 
 
@@ -24,10 +23,9 @@ namespace BatchStockUpdater.UI
             _mainWindow = mainWindow;
             _usersRepository = usersRepository;
             UserNameTextBox.Focus();
-            _logging = Logging.GetInstance();
 
             // Auto Login
-            _useAdminCreds = false;
+            _useAdminCreds = true;
 
             if (_useAdminCreds)
             {
@@ -54,7 +52,7 @@ namespace BatchStockUpdater.UI
                 if (userListQuery[0].Inactive)
                 {
                     FailedLoginMessage();
-                    _logging.LogLogin(userNameCheck, FailSuccessStatus.Failure);
+                    Logging.GetInstance().LogLogin(userNameCheck, FailSuccessStatus.Failure);
                     return;
                 }
 
@@ -65,7 +63,7 @@ namespace BatchStockUpdater.UI
 
                     _mainWindow.LogInApproved(userListQuery[0].UserType);
 
-                    _logging.LogLogin(userNameCheck, FailSuccessStatus.Success);
+                    Logging.GetInstance().LogLogin(userNameCheck, FailSuccessStatus.Success);
 
 
                     if (!_useAdminCreds)
@@ -78,13 +76,13 @@ namespace BatchStockUpdater.UI
                 else
                 {
                     FailedLoginMessage();
-                    _logging.LogLogin(userNameCheck, FailSuccessStatus.Failure);
+                    Logging.GetInstance().LogLogin(userNameCheck, FailSuccessStatus.Failure);
                 }
             }
             else
             {
                 FailedLoginMessage();
-                _logging.LogLogin(userNameCheck, FailSuccessStatus.Failure);
+                Logging.GetInstance().LogLogin(userNameCheck, FailSuccessStatus.Failure);
             }
         }
 

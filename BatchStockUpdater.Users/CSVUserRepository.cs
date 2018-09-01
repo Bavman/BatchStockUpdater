@@ -47,7 +47,8 @@ namespace BatchStockUpdater.Users
             "InactiveUser"
         };
         private IList<AppUser> _userList = new List<AppUser>();
-        private IFormatProvider provider;
+
+        private IFormatProvider _provider;
 
         public IList<AppUser> UserList
         {
@@ -59,7 +60,7 @@ namespace BatchStockUpdater.Users
         // If unsuccessful creates a new Admin User and saves a new CSV file
         public void InitializeUsers()
         {
-            if (LoadUsers() == false)
+            if (!LoadUsers())
             {
                 // Create and admin user and write it to the user.csv file
                 UserList.Add(CreateAdminUser());
@@ -74,7 +75,7 @@ namespace BatchStockUpdater.Users
             var _fileIO = new FileIO();
             var filePath = (Application.UserAppDataPath + _csvUserFileName);
 
-            var usersCSV = _fileIO.LoadCSV(filePath, false);
+            var usersCSV = _fileIO.LoadCSV(filePath);
 
             if (usersCSV == null)
             {
@@ -116,7 +117,7 @@ namespace BatchStockUpdater.Users
                     user.Email = fields[5];
 
                     var date = new DateTime();
-                    date = DateTime.ParseExact(fields[6], "d", provider);
+                    date = DateTime.ParseExact(fields[6], "d", _provider);
                     user.StartDate = date;
                     user.UserType = (UserTypeEnum)Enum.Parse(typeof(UserTypeEnum), fields[7]);
                     user.ProtectedUser = bool.Parse(fields[8]);
@@ -135,8 +136,8 @@ namespace BatchStockUpdater.Users
             user.ID = 0;
             user.UserName = "Admin";
             user.Password = "Passw0rd";
-            user.FirstName = "";
-            user.LastName = "";
+            user.FirstName = "User";
+            user.LastName = "Name";
             user.Email = "support@skillageit.com.au";
             user.StartDate = new DateTime(2000, 1, 1);
             user.UserType = UserTypeEnum.Administrator;
