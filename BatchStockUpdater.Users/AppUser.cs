@@ -98,8 +98,6 @@ namespace BatchStockUpdater.Users
 
             var isValid = Regex.IsMatch(textField, matchChars);
 
-            Console.WriteLine(isValid);
-
             if (!isValid)
             {
 

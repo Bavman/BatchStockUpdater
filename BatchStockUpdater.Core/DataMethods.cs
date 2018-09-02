@@ -17,7 +17,6 @@ namespace BatchStockUpdater.Core
         //  or return instantiated instance of class
         public static DataMethods GetInstance()
         {
-
             _me = _me ?? new DataMethods();
 
             return _me;

@@ -20,6 +20,7 @@ namespace BatchStockUpdater.Core
             {
                 _me.LogFolder = (Application.UserAppDataPath) + @"\LogFolder";
                 SetupFilePathAndStreamWriter(_me.LogFolder);
+
                 _me._isBooted = true;
             }
             
@@ -65,20 +66,9 @@ namespace BatchStockUpdater.Core
         }
 
         // Log Login 
-        public void LogLogin(string userName, FailSuccessStatus loginStatus)
+        public void LogLogin(string userName, LogStatus loginStatus)
         {
-            var status = String.Empty;
-            switch (loginStatus)
-            {
-                case FailSuccessStatus.Success:
-                    status = "successfully";
-                    break;
-                case FailSuccessStatus.Failure:
-                    status = "failed to";
-                    break;
-                default:
-                    break;
-            }
+            var status = ReturnLogStatus(loginStatus);
 
             var currentDateTime = DateTime.Now;
 
@@ -104,7 +94,7 @@ namespace BatchStockUpdater.Core
 
             var currentDateTime = DateTime.Now;
 
-            var entry = (currentDateTime.ToString() + ", " + userName + " added");
+            var entry = (currentDateTime.ToString() + ", " + userName + " user added");
 
             WriteEntryToLogFIle(_me._sessionLogFilePath, entry);
         }
@@ -132,21 +122,9 @@ namespace BatchStockUpdater.Core
         }
 
         // Log Import CSV
-        public void LogImportCSV(FailSuccessStatus loginStatus)
+        public void LogImportCSV(LogStatus loginStatus)
         {
-            var status = String.Empty;
-            switch (loginStatus)
-            {
-                case FailSuccessStatus.Success:
-                    status = "Successfully imported";
-                    break;
-                case FailSuccessStatus.Failure:
-                    status = "Failed to import";
-                    break;
-                default:
-                    break;
-            }
-
+            var status = ReturnLogStatus(loginStatus);
 
             var currentDateTime = DateTime.Now;
 
@@ -166,8 +144,27 @@ namespace BatchStockUpdater.Core
             WriteEntryToLogFIle(_me._sessionLogFilePath, entry);
         }
 
+
+        private static string ReturnLogStatus(LogStatus logStatus)
+        {
+            var status = String.Empty;
+            switch (logStatus)
+            {
+                case LogStatus.Success:
+                    status = "successfully";
+                    break;
+                case LogStatus.Failure:
+                    status = "failed to";
+                    break;
+                default:
+                    break;
+            }
+
+            return status;
+        }
+
         // Write entry to current log file
-        private void WriteEntryToLogFIle(string path, string logEntry)
+        private static void WriteEntryToLogFIle(string path, string logEntry)
         {
             var streamWriter = new StreamWriter(path, append: true);
             streamWriter.WriteLine(logEntry);

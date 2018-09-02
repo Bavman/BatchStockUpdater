@@ -11,21 +11,21 @@ namespace BatchStockUpdater.UI
     /// </summary>
     public partial class LoginWindow : Window
     {
-        IUsersRepository _usersRepository;
-        MainWindow _mainWindow;
-        private bool _useAdminCreds;
 
+        private static bool _useAdminCreds;
+
+        MainWindow _mainWindow;
 
         // Initialize Window and assign variables
-        public LoginWindow(MainWindow mainWindow, IUsersRepository usersRepository)
+        public LoginWindow(MainWindow mainWindow)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
-            _usersRepository = usersRepository;
+
             UserNameTextBox.Focus();
 
             // Auto Login
-            _useAdminCreds = true;
+            _useAdminCreds = false;
 
             if (_useAdminCreds)
             {
@@ -37,52 +37,21 @@ namespace BatchStockUpdater.UI
         // Check user credentials and enable login if correct credentials
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            CheckUserCredentials(UserNameTextBox.Text, PasswordTextBox.Text);
-        }
+            //var isCorrectCreds = CheckUserCredentials(UserNameTextBox.Text, PasswordTextBox.Text);
+            var validAppUser = UserLogin.CheckUserCredentials(UserNameTextBox.Text, PasswordTextBox.Text);
 
-        // Check the user credentials match and fire LogInApproved in the MainWinow
-        private void CheckUserCredentials(string userNameCheck, string passwordCheck)
-        {
-            var userList = _usersRepository.UserList;
-            var userListQuery = userList.Where(u => u.UserName.Equals(userNameCheck)).ToArray();
-
-            if (userListQuery.Length > 0)
+            if (validAppUser != null)
             {
-                // Inactive User
-                if (userListQuery[0].Inactive)
+                _mainWindow.CurrentUserName = validAppUser.UserName;
+
+                _mainWindow.LogInApproved(validAppUser.UserType);
+
+                if (!_useAdminCreds)
                 {
-                    FailedLoginMessage();
-                    Logging.GetInstance().LogLogin(userNameCheck, FailSuccessStatus.Failure);
-                    return;
+                    ClearUserNameAndPasswordTextBoxes();
                 }
 
-                // Successful credentials or not
-                if (userListQuery[0].Password == passwordCheck)
-                {
-                    _mainWindow.CurrentUserName = userNameCheck;
-
-                    _mainWindow.LogInApproved(userListQuery[0].UserType);
-
-                    Logging.GetInstance().LogLogin(userNameCheck, FailSuccessStatus.Success);
-
-
-                    if (!_useAdminCreds)
-                    {
-                        ClearUserNameAndPasswordTextBoxes();
-                    }
-                    
-                    this.Close();
-                }
-                else
-                {
-                    FailedLoginMessage();
-                    Logging.GetInstance().LogLogin(userNameCheck, FailSuccessStatus.Failure);
-                }
-            }
-            else
-            {
-                FailedLoginMessage();
-                Logging.GetInstance().LogLogin(userNameCheck, FailSuccessStatus.Failure);
+                this.Close();
             }
         }
 
@@ -93,11 +62,7 @@ namespace BatchStockUpdater.UI
             PasswordTextBox.Text = String.Empty;
         }
 
-        // User credentials messagebox
-        private void FailedLoginMessage()
-        {
-            MessageBox.Show("Sorry, user credentials do not match.");
-        }
+        
 
         // Hide instead of close the window - allows the window to be reopened again
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)

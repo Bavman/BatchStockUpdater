@@ -62,8 +62,10 @@ namespace BatchStockUpdater.UI
             _dataMethods = DataMethods.GetInstance();
             _manageUserWindow = new ManageUsersWindow(_userRepository);
 
-            _loginWindow = new LoginWindow(this, _userRepository);
+            _loginWindow = new LoginWindow(this);
             _preferncesWindow = new PreferencesWindow();
+
+            UserLogin.UsersRepository = _userRepository;
 
             _csvFileIO = new FileIO();
 
@@ -75,8 +77,13 @@ namespace BatchStockUpdater.UI
             var csvDataTable = new DataTable();
             var defaultViewDataTable = _dataMethods.SetupDataTable(csvDataTable, _csvHeader);
             SetupDataGrid(defaultViewDataTable);
+
         }
 
+        private void StatusMethod(string status, int intVar)
+        {
+            Console.WriteLine();
+        }
 
         #region buttons
         // Buttons and objects related to the XAML MainWindow
@@ -122,12 +129,12 @@ namespace BatchStockUpdater.UI
 
                         _isDataTableImported = true;
                         ExportCSVButton.IsEnabled = true;
-                        Logging.GetInstance().LogImportCSV(FailSuccessStatus.Success);
+                        Logging.GetInstance().LogImportCSV(LogStatus.Success);
                     }
                 }
                 else
                 {
-                    Logging.GetInstance().LogImportCSV(FailSuccessStatus.Failure);
+                    Logging.GetInstance().LogImportCSV(LogStatus.Failure);
                 }
             }
 

@@ -137,31 +137,6 @@ namespace BatchStockUpdater.UI
                     ResetBackgroundColours();
                     EnableProtectedUserCheckBox();
                 }
-                /*
-                if (_isAddingNewUser && _isUserNameOK && _isPasswordOK && _isFirstNameOK && _isLastNameOK && _isEmailOK)
-                {
-                    if (_userRepository.DoesUserExist(UserNameTextBox.Text))
-                    {
-                        MessageBox.Show("User name already exists, please try a different user name");
-                        return;
-                    }
-
-                    var newAppUser = AssignPropsToUserClass();
-
-                    if (newAppUser == null)
-                    {
-                        return;
-                    }
-
-                    _userRepository.AddUser(newAppUser);
-                    Logging.GetInstance().LogAddUser(newAppUser.UserName);
-
-                    _currentUserID = _userRepository.ReturnLastUserID()-1;
-                    _isAddingNewUser = false;
-                    EnableNewUserButtons(true);
-                    ResetBackgroundColours();
-                    EnableProtectedUserCheckBox();
-                }*/
             }
         }
 
@@ -273,6 +248,7 @@ namespace BatchStockUpdater.UI
             }
         }
 
+        // Check if user string properties are null or empty
         private bool CheckUserFields(AppUser appUser)
         {
             var isValid = true; 
@@ -392,7 +368,7 @@ namespace BatchStockUpdater.UI
         {
 
             var isValid = Regex.IsMatch(prop, matchChars);
-            Console.WriteLine(isValid);
+
             if (!isValid)
             {
                 MessageBox.Show("The " + fieldName + mustContainMessage + ".");
