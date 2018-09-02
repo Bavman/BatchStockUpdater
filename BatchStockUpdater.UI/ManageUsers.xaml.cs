@@ -121,15 +121,15 @@ namespace BatchStockUpdater.UI
                         return;
                     }
 
-                    var newAppUser = AssignPropsToUserClass();
+                    var _newUser = AssignPropsToUserClass();
 
-                    if (newAppUser == null)
+                    if (_newUser == null)
                     {
                         return;
                     }
 
-                    _userRepository.AddUser(newAppUser);
-                    Logging.GetInstance().LogAddUser(newAppUser.UserName);
+                    _userRepository.AddUser(_newUser);
+                    Logging.GetInstance().LogAddUser(_newUser.UserName);
 
                     _currentUserID = _userRepository.ReturnLastUserID() - 1;
                     _isAddingNewUser = false;
@@ -359,24 +359,6 @@ namespace BatchStockUpdater.UI
             UserTypeComboBox.Text = currentUser.UserType.ToString();
             ProtectedUserCheckBox.IsChecked = currentUser.ProtectedUser;
             UserInactiveCheckBox.IsChecked = currentUser.Inactive;
-        }
-
-        // Checks the UI input fields making sure they match the required length and symbols
-        // of the requested field. eg. email address requres the user to enter a valid email address
-        // not just any text.
-        private bool CheckFields(string prop, string matchChars, string mustContainMessage, string fieldName)
-        {
-
-            var isValid = Regex.IsMatch(prop, matchChars);
-
-            if (!isValid)
-            {
-                MessageBox.Show("The " + fieldName + mustContainMessage + ".");
-
-                return false;
-            }
-
-            return true; 
         }
 
         // Assign properties from the UI input fields to the AppUser class and return the class.
