@@ -22,6 +22,7 @@ namespace BatchStockUpdater.Core
             return _me;
         }
 
+
         // Populate Datatable ojbect from with CSV data
         public DataTable PopulateDataTable(TextFieldParser csvData, string[] csvHeader)
         {

@@ -44,10 +44,18 @@ namespace BatchStockUpdater.UI
             EnableNewUserButtons(false);
             ResetBackgroundColours();
 
+            var date = new DateTime();
+            date = DateTime.ParseExact(StartDateDatePickerTextBox.Text, "d", _provider);
+
             _newUser = new AppUser()
             {
-                ID = _currentUserID
+                ID = _currentUserID,
+                StartDate = date,
+                UserType = (UserTypeEnum)Enum.Parse(typeof(UserTypeEnum), UserTypeComboBox.Text),
+                Inactive = (bool)UserInactiveCheckBox.IsChecked,
+                ProtectedUser = (bool)ProtectedUserCheckBox.IsChecked
             };
+
         }
 
         private void NextUserButton_Click(object sender, RoutedEventArgs e)
