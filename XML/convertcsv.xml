@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<?xml-stylesheet type="text/css" href="convertcsv.css"?>-->
+<?xml-stylesheet type="text/xsl" href="convertcsv.xslt"?>
+
+<root>
+  <row>
+    <itemCode>A0001</itemCode>
+    <itemDescription>Horse on Wheels</itemDescription>
+    <currentCount>5</currentCount>
+    <onOrder>No</onOrder>
+  </row>
+  <row>
+    <itemCode>A0002</itemCode>
+    <itemDescription>Wheels</itemDescription>
+    <currentCount>8</currentCount>
+    <onOrder>Yes</onOrder>
+  </row>
+  <row>
+    <itemCode>A0003</itemCode>
+    <itemDescription>Table</itemDescription>
+    <currentCount>132</currentCount>
+    <onOrder>No</onOrder>
+  </row>
+</root>
