@@ -12,13 +12,25 @@
   <row>
     <itemCode>A0002</itemCode>
     <itemDescription>Wheels</itemDescription>
-    <currentCount>8</currentCount>
+    <currentCount>0</currentCount>
     <onOrder>Yes</onOrder>
   </row>
   <row>
     <itemCode>A0003</itemCode>
     <itemDescription>Table</itemDescription>
     <currentCount>132</currentCount>
+    <onOrder>No</onOrder>
+  </row>
+  <row>
+    <itemCode>A0004</itemCode>
+    <itemDescription>Table</itemDescription>
+    <currentCount>1</currentCount>
+    <onOrder>Yes</onOrder>
+  </row>
+  <row>
+    <itemCode>A0005</itemCode>
+    <itemDescription>Toy Wheels</itemDescription>
+    <currentCount>0</currentCount>
     <onOrder>No</onOrder>
   </row>
 </root>

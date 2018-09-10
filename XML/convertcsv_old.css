@@ -1,0 +1,32 @@
+
+row {
+
+	display: table-row;
+}
+
+itemCode {
+	color: #0D3427;
+	font-size: 120%;
+	font-weight: normal;
+}
+
+itemDescription {
+	color: black;
+	font-size: 120%;
+	font-weight: normal;
+}
+
+currentCount {
+	color: #0D3427;
+	font-size: 120%;;
+	font-weight: bold;
+}
+
+onOrder {
+	color: #0D3427;
+	font-size: 120%;;
+	font-weight: bold;
+}
+
+/* phone::before {content: attr(type) ":"}
+phone[primary]::after{content: " (" attr(primary) ")"} /*
