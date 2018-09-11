@@ -54,16 +54,27 @@ namespace BatchStockUpdater.Core
             set { _me._folederName = value; }
         }
 
-        private string _fileName = "stocklist.CSV";
-        public string FileName
+        private string _csvFileName = "stocklist.CSV";
+        public string CSVFileName
         {
-            get { return _me._fileName; }
-            set { _me._fileName = value; }
+            get { return _me._csvFileName; }
+            set { _me._csvFileName = value; }
         }
 
-        public string FilePath
+        private string _xmlFileName = "stocklist.xml";
+        public string XMLFileName
         {
-            get { return _me._folederName + @"\" + _me.FileName; }
+            get { return _xmlFileName; }
+        }
+
+        public string CSVFilePath
+        {
+            get { return _me._folederName + @"\" + _me.CSVFileName; }
+        }
+
+        public string XMLFilePath
+        {
+            get { return _me._folederName + @"\" + _me._xmlFileName; }
         }
 
         // Save class properties to Json file
@@ -108,7 +119,7 @@ namespace BatchStockUpdater.Core
                 _me.CheckFileDateAndTime = loadedPrefs.CheckFileDateAndTime;
                 _me.TimeCheck = loadedPrefs.TimeCheck;
                 _me.NDaysBefore = loadedPrefs.NDaysBefore;
-                _me.FileName = loadedPrefs.FileName;
+                _me.CSVFileName = loadedPrefs.CSVFileName;
                 _me.FolderName = loadedPrefs.FolderName;
 
                 file.Close();

@@ -22,10 +22,10 @@ namespace BatchStockUpdater.Core.Tests
         };
 
 
-        string[] colArray1 = new string[] { "A0001", "A0002", "A0003", "A0004" };
-        string[] colArray2 = new string[] { "Horse on Wheels", "Elephant on Wheels", "Dog on Wheels", "Seal on Wheels" };
-        int[] colArray3 = new int[] { 4, 20, 10, 3 };
-        string[] colArray4 = new string[] { "No", "No", "Yes", "No" };
+        string[] _colArray1 = new string[] { "A0001", "A0002", "A0003", "A0004" };
+        string[] _colArray2 = new string[] { "Horse on Wheels", "Elephant on Wheels", "Dog on Wheels", "Seal on Wheels" };
+        int[] _colArray3 = new int[] { 4, 20, 10, 3 };
+        string[] _colArray4 = new string[] { "No", "No", "Yes", "No" };
 
         // Tests collection returned by the method ReturnColumnCollection against the above local array variables.
         // This method can be used to store imported columns from the stocklist.csv file for later comparison.
@@ -51,7 +51,7 @@ namespace BatchStockUpdater.Core.Tests
             }
 
             Console.WriteLine("TestArray");
-            foreach (var cell in colArray4)
+            foreach (var cell in _colArray4)
             {
                 Console.WriteLine(cell);
             }
@@ -60,7 +60,7 @@ namespace BatchStockUpdater.Core.Tests
             //CollectionAssert.AreEqual(testCollection.ToArray(), colArray1);
             //CollectionAssert.AreEqual(testCollection.ToArray(), colArray2);
             //CollectionAssert.AreEqual(testCollection.ToArray(), colArray3);
-            CollectionAssert.AreEqual(testCollection.ToArray(), colArray4);
+            CollectionAssert.AreEqual(testCollection.ToArray(), _colArray4);
 
             //Assert.AreEqual(4, testCollection.Count);
         }
@@ -84,7 +84,7 @@ namespace BatchStockUpdater.Core.Tests
 
 
             var dataMethods = DataMethods.GetInstance();
-            var isEqual = dataMethods.CompareCurrentCountsTables<string>(colArray1, testColArray1);
+            var isEqual = dataMethods.CompareCurrentCountsTables<string>(_colArray1, testColArray1);
             //var isEqual = dataMethods.CompareCurrentCountsTables<AppUser>(userList1, userList3);
 
             Assert.AreEqual(isEqual, true);

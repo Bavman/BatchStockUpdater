@@ -17,17 +17,20 @@ namespace BatchStockUpdater.UI
     {
 
         // Class References
-        FileIO _csvFileIO;
-        Prefs _prefs;
-        DataMethods _dataMethods;
+        FileIO _csvFileIO = new FileIO();
+        Prefs _prefs = Prefs.GetInstance();
+        DataMethods _dataMethods = DataMethods.GetInstance();
+        XMLExporter _xmlExporter = new XMLExporter();
 
-        IUsersRepository _userRepository;
+
+        IUsersRepository _userRepository = CSVUserRepository.GetInstance();
 
         // XAML Window References
         LoginWindow _loginWindow;
         OverwriteQueryWindow _overwriteQueryWindow;
         PreferencesWindow _preferncesWindow;
         ManageUsersWindow _manageUserWindow;
+
 
         // Variables
         DataTable _csvDataTable;
@@ -50,24 +53,21 @@ namespace BatchStockUpdater.UI
         {
 
             this.Title = "Batch Stock Updater";
+
             Logging.GetInstance().OpenApplication();
 
             // Load Users or create administrator user and save user files
-            _userRepository = CSVUserRepository.GetInstance();
+
             _userRepository.InitializeUsers();
 
-            _prefs = Prefs.GetInstance();
             _prefs.LoadPrefs();
 
-            _dataMethods = DataMethods.GetInstance();
             _manageUserWindow = new ManageUsersWindow(_userRepository);
 
             _loginWindow = new LoginWindow(this);
             _preferncesWindow = new PreferencesWindow();
 
             UserLogin.UsersRepository = _userRepository;
-
-            _csvFileIO = new FileIO();
 
             InitializeComponent();
 
@@ -77,7 +77,6 @@ namespace BatchStockUpdater.UI
             var csvDataTable = new DataTable();
             var defaultViewDataTable = _dataMethods.SetupDataTable(csvDataTable, _csvHeader);
             SetupDataGrid(defaultViewDataTable);
-
         }
 
         private void StatusMethod(string status, int intVar)
@@ -114,7 +113,7 @@ namespace BatchStockUpdater.UI
             // Prevent multiple populations of DataTable
             if (!_isDataTableImported)
             {
-                var csvData = _csvFileIO.LoadCSV(_prefs.FilePath, _csvHeader, _prefs.CheckFileDateAndTime, true);
+                var csvData = _csvFileIO.LoadCSV(_prefs.CSVFilePath, _csvHeader, _prefs.CheckFileDateAndTime, true);
                 if (csvData != null)
                 {
                     _csvDataTable = _dataMethods.PopulateDataTable(csvData, _csvHeader);
@@ -129,6 +128,7 @@ namespace BatchStockUpdater.UI
 
                         _isDataTableImported = true;
                         ExportCSVButton.IsEnabled = true;
+                        ExportXMLButton.IsEnabled = true;
                         Logging.GetInstance().LogImportCSV(LogStatus.Success);
                     }
                 }
@@ -162,18 +162,24 @@ namespace BatchStockUpdater.UI
             }
 
             // Open Overwrite Query Window or save if file does not exist in path
-            if (_csvFileIO.CheckFilePath(_prefs.FilePath))
+            if (_csvFileIO.CheckFilePath(_prefs.CSVFilePath))
             {
                 if (_overwriteQueryWindow == null)
                 {
-                    _overwriteQueryWindow = new OverwriteQueryWindow(this, _prefs.FilePath);
+                    _overwriteQueryWindow = new OverwriteQueryWindow(this, _prefs.CSVFilePath);
                 }
                 _overwriteQueryWindow.Show();
             }
             else
             {
-                _csvFileIO.SaveCSV(_prefs.FilePath, _csvDataTable);
+                _csvFileIO.SaveCSV(_prefs.CSVFilePath, _csvDataTable);
             }  
+        }
+
+
+        private void ExportXMLButton_Click(object sender, RoutedEventArgs e)
+        {
+            _xmlExporter.ExportXML(_prefs.XMLFilePath, _csvDataTable);
         }
 
         private void PreferencesButton_Click(object sender, RoutedEventArgs e)
@@ -308,14 +314,10 @@ namespace BatchStockUpdater.UI
         //@TODO Update colour of modified cell
         private void CSVDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-
-            
             var cell = new DataGridCell();
 
             var row = e.Row;
             var column = e.Column;
-
-          
 
             //row.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 127));
 
