@@ -12,10 +12,26 @@ namespace BatchStockUpdater.Core
     public class XMLExporter
     {
 
-        public void ExportXML(string savePath, DataTable dataTable)
+        public void ExportXML(string savePath, DataTable dataTable, int styleIndex)
         {
+
+            XProcessingInstruction styleSheet = null;
+
+            switch (styleIndex)
+            {
+                case 1:
+
+                    styleSheet = new XProcessingInstruction("xml-stylesheet", "type='text/xsl' href='stocklist1.xslt'");
+                    break;
+                    
+                case 2:
+
+                    styleSheet = new XProcessingInstruction("xml-stylesheet", "type='text/xsl' href='stocklist2.xslt'");
+                    break;
+            }
+
             var document = new XDocument(new XDeclaration("1.0", "utf-8", "yes"),
-                new XProcessingInstruction("xml-stylesheet", "type='text/xsl' href='stocklist.xslt'"));
+                styleSheet);
 
             var header = new XElement("header",
                 new XElement("th", "Item Code"),

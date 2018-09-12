@@ -128,7 +128,7 @@ namespace BatchStockUpdater.UI
 
                         _isDataTableImported = true;
                         ExportCSVButton.IsEnabled = true;
-                        ExportXMLButton.IsEnabled = true;
+                        ExportXMLButton1.IsEnabled = true;
                         Logging.GetInstance().LogImportCSV(LogStatus.Success);
                     }
                 }
@@ -177,9 +177,14 @@ namespace BatchStockUpdater.UI
         }
 
 
-        private void ExportXMLButton_Click(object sender, RoutedEventArgs e)
+        private void ExportXMLButton1_Click(object sender, RoutedEventArgs e)
         {
-            _xmlExporter.ExportXML(_prefs.XMLFilePath, _csvDataTable);
+            _xmlExporter.ExportXML(_prefs.XMLFilePath, _csvDataTable, 1);
+        }
+
+        private void ExportXMLButton2_Click(object sender, RoutedEventArgs e)
+        {
+            _xmlExporter.ExportXML(_prefs.XMLFilePath, _csvDataTable, 2);
         }
 
         private void PreferencesButton_Click(object sender, RoutedEventArgs e)
@@ -325,6 +330,7 @@ namespace BatchStockUpdater.UI
             Console.WriteLine("column" + column.DisplayIndex);
             Console.WriteLine("Int List " + _csvCurrentCountsImport[row.GetIndex()]);
         }
+
 
     }
 

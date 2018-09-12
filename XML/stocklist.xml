@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<?xml-stylesheet type='text/xsl' href='stocklist.xslt'?>
+<?xml-stylesheet type='text/xsl' href='stocklist1.xslt'?>
 <table>
   <header>
     <th>Item Code</th>
@@ -46,7 +46,7 @@
   <row>
     <itemCode>A0007</itemCode>
     <itemDescription>Clown</itemDescription>
-    <currentCount>5</currentCount>
+    <currentCount>0</currentCount>
     <onOrder>No</onOrder>
   </row>
   <row>

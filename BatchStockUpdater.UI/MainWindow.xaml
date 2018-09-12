@@ -40,10 +40,12 @@
 
         </Border>
 
-        <Button x:Name="ExportCSVButton" Content ="Export CSV" Grid.Column="0" Grid.Row="1" VerticalAlignment="Bottom" Click="ExportCSVButton_Click" IsEnabled="False" Margin="23,0,23,100" Width="140"/>
+        <Button x:Name="ExportCSVButton" Content ="Export CSV" Grid.Column="0" Grid.Row="1" VerticalAlignment="Bottom" Click="ExportCSVButton_Click" IsEnabled="False" Margin="23,0,23,154" Width="150"/>
 
-        <Button x:Name="ExportXMLButton" Content ="Export XML" Grid.Column="0" Grid.Row="1" VerticalAlignment="Bottom" Click="ExportXMLButton_Click"  IsEnabled="False" Margin="23,0,23,30" Width="140"/>
+        <Button x:Name="ExportXMLButton1" Content ="Export XML Style 1" FontSize="17" Grid.Column="0" Grid.Row="1" VerticalAlignment="Bottom" Click="ExportXMLButton1_Click"  IsEnabled="False" Margin="23,0,23,66" Width="150"/>
 
+        <Button x:Name="ExportXMLButton2" Content ="Export XML Style 2" FontSize="17" Grid.Column="0" Grid.Row="1" VerticalAlignment="Bottom" Click="ExportXMLButton2_Click"  IsEnabled="False" Margin="23,0,23,10" Width="150"/>
+        
         <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                 BorderBrush="Black" BorderThickness="1" Grid.Row="1" Grid.Column="1">
         </Border>

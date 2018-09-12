@@ -13,14 +13,30 @@ row {
 
 
 */
-table, th, td {
+table, td {
     border-collapse: collapse;
     border: 1px solid black;
-    width: 500px;
+    width: 600px;
 
-    color: #0D3427;
+    color: rgb(19, 31, 27);
     font-size: 120%;
-    font-weight: bold;
+	font-weight: bold;
+	
+	background-color: rgb(235, 235, 235);
+}
+
+h1{
+	text-indent: 90px;
+	font-family: Helvetica, sans-serif;
+}
+
+th {
+	display: table-cell;
+	font-size: 120%;
+	border: 0.5px solid black;
+	text-align: center;
+	color: rgb(235, 235, 235);;
+	background-color: rgb(40, 56, 56);
 }
 
 itemCode,
@@ -30,38 +46,29 @@ onOrder{
 	display: table-cell;
 	border: 0.5px solid black;
 	text-align: center;
-
+	font-family: Helvetica, sans-serif;
+	font-size: 100%;
+	font-weight: normal;
+	color: rgb(40, 56, 56);
 }
 
 itemCode {
-    width: 20%;
-    color: #0D3427;
-    font-size: 120%;
-    font-weight: normal;
+    width: 15%;
 }
 
 itemDescription {
-	width: 50%;
-
-	color: black;
-	font-size: 120%;
-	font-weight: normal;
+	width: 55%;
+	text-align: left;
+	text-indent: 15px;
 }
 
 currentCount {
 	width: 15%;
 
-	color: #0D3427;
-	font-size: 120%;;
-	font-weight: bold;
 }
 
 onOrder {
 	width: 15%;
-
-	color: #0D3427;
-	font-size: 120%;;
-	font-weight: bold;
 }
 
 /* phone::before {content: attr(type) ":"}
