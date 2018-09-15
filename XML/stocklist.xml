@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <?xml-stylesheet type='text/xsl' href='stocklist1.xslt'?>
-<table>
-  <header>
-    <th>Item Code</th>
-    <th>Item Description</th>
-    <th>Current Count</th>
-    <th>On Order</th>
-  </header>
+<stockTable>
+  <headers>
+    <headerItem>Item Code</headerItem>
+    <headerItem>Item Description</headerItem>
+    <headerItem>Current Count</headerItem>
+    <headerItem>On Order</headerItem>
+  </headers>
   <row>
     <itemCode>A0001</itemCode>
     <itemDescription>Horse on Wheels</itemDescription>
@@ -22,19 +22,19 @@
   <row>
     <itemCode>A0003</itemCode>
     <itemDescription>Dog on Wheels</itemDescription>
-    <currentCount>54</currentCount>
+    <currentCount>0</currentCount>
     <onOrder>Yes</onOrder>
   </row>
   <row>
     <itemCode>A0004</itemCode>
     <itemDescription>Seal on Wheels</itemDescription>
-    <currentCount>3</currentCount>
+    <currentCount>0</currentCount>
     <onOrder>No</onOrder>
   </row>
   <row>
     <itemCode>A0005</itemCode>
     <itemDescription>Bear on Wheels</itemDescription>
-    <currentCount>7</currentCount>
+    <currentCount>1</currentCount>
     <onOrder>No</onOrder>
   </row>
   <row>
@@ -46,7 +46,7 @@
   <row>
     <itemCode>A0007</itemCode>
     <itemDescription>Clown</itemDescription>
-    <currentCount>0</currentCount>
+    <currentCount>2</currentCount>
     <onOrder>No</onOrder>
   </row>
   <row>
@@ -247,4 +247,4 @@
     <currentCount>4</currentCount>
     <onOrder>Yes</onOrder>
   </row>
-</table>
+</stockTable>

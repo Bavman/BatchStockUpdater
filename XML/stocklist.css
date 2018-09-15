@@ -1,20 +1,8 @@
 
-/*
-root { 
+stockTable {
+	table-layout: auto;
 	display: table;
-	width: 500px;
-	border: thin solid black;
-}
-
-row {
-
-	display: table-row;
-}
-
-
-*/
-table, td {
-    border-collapse: collapse;
+	border-collapse: collapse;
     border: 1px solid black;
     width: 600px;
 
@@ -25,18 +13,24 @@ table, td {
 	background-color: rgb(235, 235, 235);
 }
 
-h1{
-	text-indent: 90px;
-	font-family: Helvetica, sans-serif;
+stockTable {
+	table-layout: auto;
+	display: table;
+	width: 600px
 }
 
-th {
+headerItem {
 	display: table-cell;
 	font-size: 120%;
 	border: 0.5px solid black;
 	text-align: center;
+	vertical-align: middle;
 	color: rgb(235, 235, 235);;
 	background-color: rgb(40, 56, 56);
+}
+
+row {
+	display: table-row;
 }
 
 itemCode,
@@ -44,7 +38,7 @@ itemDescription,
 currentCount,
 onOrder{
 	display: table-cell;
-	border: 0.5px solid black;
+	border: 1px solid black;
 	text-align: center;
 	font-family: Helvetica, sans-serif;
 	font-size: 100%;
@@ -64,7 +58,6 @@ itemDescription {
 
 currentCount {
 	width: 15%;
-
 }
 
 onOrder {

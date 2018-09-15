@@ -90,11 +90,13 @@ namespace BatchStockUpdater.Core
 
                 Logging.GetInstance().LogExportCSV();
             }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show(@"Cannot save to C:\. Will have to run the application as Administrator");
+            }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                MessageBox.Show(@"Cannot save to C:\. Will have to run the application as Administrator");
-                //throw new ArgumentException(@"Cannot write to c:\. Try running program as Administrator");
             }
 
             return isSaved;

@@ -128,7 +128,19 @@ namespace BatchStockUpdater.Core
 
             var currentDateTime = DateTime.Now;
 
-            var entry = (currentDateTime.ToString() + ", " + status + " stocklist.csv");
+            var entry = (currentDateTime.ToString() + ", " + status + " imported stocklist.csv");
+
+            WriteEntryToLogFIle(_me._sessionLogFilePath, entry);
+        }
+
+        // Log Import CSV
+        public void LogExportXML(LogStatus loginStatus, int styleSheet)
+        {
+            var status = ReturnLogStatus(loginStatus);
+
+            var currentDateTime = DateTime.Now;
+
+            var entry = (currentDateTime.ToString() + ", " + status + " exported stocklist.xml style "+styleSheet.ToString());
 
             WriteEntryToLogFIle(_me._sessionLogFilePath, entry);
         }

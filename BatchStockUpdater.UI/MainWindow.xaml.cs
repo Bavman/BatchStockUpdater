@@ -7,6 +7,7 @@ using BatchStockUpdater.Core;
 using System.Data;
 using BatchStockUpdater.Users;
 using System.Diagnostics;
+using System.Text;
 
 namespace BatchStockUpdater.UI
 {
@@ -103,6 +104,7 @@ namespace BatchStockUpdater.UI
             EnableButtons(false);
             ClearDataTable();
             LoginButton.IsEnabled = true;
+
             Logging.GetInstance().LogLogOut(CurrentUserName);
 
             CurrentUserName = String.Empty;
@@ -129,6 +131,7 @@ namespace BatchStockUpdater.UI
                         _isDataTableImported = true;
                         ExportCSVButton.IsEnabled = true;
                         ExportXMLButton1.IsEnabled = true;
+                        ExportXMLButton2.IsEnabled = true;
                         Logging.GetInstance().LogImportCSV(LogStatus.Success);
                     }
                 }
@@ -146,7 +149,6 @@ namespace BatchStockUpdater.UI
             if (_csvDataTable.Rows.Count == 0)
             {
                 MessageBox.Show("Datafile has not been imported. Please Import and update before exporting");
-
                 return;
             }
 
@@ -176,15 +178,39 @@ namespace BatchStockUpdater.UI
             }  
         }
 
+        private static string AllOperationMessages(OperationResult result)
+        {
+            var builtMessage = new StringBuilder();
+            builtMessage.AppendLine(string.Join(",\n", result.MessageList.ToArray()));
+            return builtMessage.ToString();
+        }
 
         private void ExportXMLButton1_Click(object sender, RoutedEventArgs e)
         {
-            _xmlExporter.ExportXML(_prefs.XMLFilePath, _csvDataTable, 1);
+            var result = _xmlExporter.ExportXML(_prefs.XMLFilePath, _csvDataTable, 1);
+            if (result.Success)
+            {
+                MessageBox.Show(AllOperationMessages(result));
+            }
+            else
+            {;
+                MessageBox.Show(AllOperationMessages(result));
+            }
+
         }
 
         private void ExportXMLButton2_Click(object sender, RoutedEventArgs e)
         {
-            _xmlExporter.ExportXML(_prefs.XMLFilePath, _csvDataTable, 2);
+            var result = _xmlExporter.ExportXML(_prefs.XMLFilePath, _csvDataTable, 2);
+            if (result.Success)
+            {
+                MessageBox.Show(AllOperationMessages(result));
+            }
+            else
+            {
+                ;
+                MessageBox.Show(AllOperationMessages(result));
+            }
         }
 
         private void PreferencesButton_Click(object sender, RoutedEventArgs e)
@@ -206,6 +232,7 @@ namespace BatchStockUpdater.UI
         }
 
         #endregion
+
 
         // Hide MainWindow UI Buttons - defaults for lowest user accessability type
         private void HideUIEmementsOnBoot()
@@ -302,6 +329,8 @@ namespace BatchStockUpdater.UI
                 LogOutButton.IsEnabled = false;
                 ImportCSVButton.IsEnabled = false;
                 ExportCSVButton.IsEnabled = false;
+                ExportXMLButton1.IsEnabled = false;
+                ExportXMLButton2.IsEnabled = false;
             }
         }
 
