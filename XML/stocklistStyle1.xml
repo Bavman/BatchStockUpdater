@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<?xml-stylesheet type='text/xsl' href='stocklist2.xslt'?>
+<?xml-stylesheet type='text/xsl' href='stocklist1.xslt'?>
 <stockTable>
   <headers>
     <headerItem>Item Code</headerItem>
@@ -16,13 +16,13 @@
   <row>
     <itemCode>A0002</itemCode>
     <itemDescription>Elephant on Wheels</itemDescription>
-    <currentCount>0</currentCount>
+    <currentCount>2</currentCount>
     <onOrder>No</onOrder>
   </row>
   <row>
     <itemCode>A0003</itemCode>
     <itemDescription>Dog on Wheels</itemDescription>
-    <currentCount>5</currentCount>
+    <currentCount>54</currentCount>
     <onOrder>Yes</onOrder>
   </row>
   <row>
@@ -40,7 +40,7 @@
   <row>
     <itemCode>A0006</itemCode>
     <itemDescription>Teddy Bear</itemDescription>
-    <currentCount>0</currentCount>
+    <currentCount>2</currentCount>
     <onOrder>Yes</onOrder>
   </row>
   <row>

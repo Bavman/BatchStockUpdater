@@ -187,7 +187,7 @@ namespace BatchStockUpdater.UI
 
         private void ExportXMLButton1_Click(object sender, RoutedEventArgs e)
         {
-            var result = _xmlExporter.ExportXML(_prefs.XMLFilePath, _csvDataTable, 1);
+            var result = _xmlExporter.ExportXML(_prefs.XMLFilePathStyle1, _csvDataTable, 1);
             if (result.Success)
             {
                 MessageBox.Show(AllOperationMessages(result));
@@ -201,7 +201,7 @@ namespace BatchStockUpdater.UI
 
         private void ExportXMLButton2_Click(object sender, RoutedEventArgs e)
         {
-            var result = _xmlExporter.ExportXML(_prefs.XMLFilePath, _csvDataTable, 2);
+            var result = _xmlExporter.ExportXML(_prefs.XMLFilePathStyle2, _csvDataTable, 2);
             if (result.Success)
             {
                 MessageBox.Show(AllOperationMessages(result));

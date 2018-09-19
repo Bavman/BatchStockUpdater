@@ -61,10 +61,18 @@ namespace BatchStockUpdater.Core
             set { _me._csvFileName = value; }
         }
 
-        private string _xmlFileName = "stocklist.xml";
-        public string XMLFileName
+        private string _xmlFileNameStyle1 = "stocklistStyle1.xml";
+
+        public string XMLFileNameStyle1
         {
-            get { return _xmlFileName; }
+            get { return _xmlFileNameStyle1; }
+        }
+
+        private string _xmlFileNameStyle2 = "stocklistStyle2.xml";
+
+        public string XMLFileNameStyle2
+        {
+            get { return _xmlFileNameStyle2; }
         }
 
         public string CSVFilePath
@@ -72,11 +80,15 @@ namespace BatchStockUpdater.Core
             get { return _me._folederName + @"\" + _me.CSVFileName; }
         }
 
-        public string XMLFilePath
+        public string XMLFilePathStyle1
         {
-            get { return _me._folederName + @"\" + _me._xmlFileName; }
+            get { return _me._folederName + @"\" + _me._xmlFileNameStyle1; }
         }
 
+        public string XMLFilePathStyle2
+        {
+            get { return _me._folederName + @"\" + _me._xmlFileNameStyle2; }
+        }
         // Save class properties to Json file
         public void SavePrefs()
         {
