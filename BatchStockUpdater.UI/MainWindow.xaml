@@ -62,7 +62,7 @@
         </Border>
 
         <DataGrid x:Name="CSVDataGrid" Grid.Column="1" HorizontalAlignment="Left" Height="495" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="660" SelectionChanged="CSVDataGrid_SelectionChanged" FontSize="16" CellEditEnding="CSVDataGrid_CellEditEnding"/>
-        <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="60" Margin="10,10,-90,0" VerticalAlignment="Top" Width="1172">
+        <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="60" Margin="10,10,-90,0" VerticalAlignment="Top" Width="1060">
             <Label x:Name="label" Content="Batch Stock Updater" FontSize="36"/>
         </Border>
 
