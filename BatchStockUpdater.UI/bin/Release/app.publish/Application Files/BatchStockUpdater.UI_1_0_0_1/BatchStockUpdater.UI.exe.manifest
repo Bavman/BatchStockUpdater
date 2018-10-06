@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="BatchStockUpdater.UI.exe" version="1.0.0.1" publicKeyToken="11d5c9b1ea6bfe9c" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="BatchStockUpdater.UI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="BatchStockUpdater.UI.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BatchStockUpdater.Core.dll" size="18432">
+      <assemblyIdentity name="BatchStockUpdater.Core" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>fqP8flFxrZlH88UfJCLZo625Dvsa3P1JkVRjz9XAkeA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BatchStockUpdater.UI.exe" size="40408">
+      <assemblyIdentity name="BatchStockUpdater.UI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>JaK26OR0/DwdNRoiJJKpcn8y3Ymy7El9ofFP+dQsl9o=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BatchStockUpdater.Users.dll" size="11776">
+      <assemblyIdentity name="BatchStockUpdater.Users" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>rb1mrxktnuyoasTr4fqNxEfqKyr498hK7aY8t2E8iLY=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="662528">
+      <assemblyIdentity name="Newtonsoft.Json" version="11.0.0.0" publicKeyToken="30AD4FE6B2A6AEED" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>9Yw3T/yq5ONtdA2Q+/f+cNCrtzKM2a86CntwgD6ZS6Q=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="BatchStockUpdater.UI.exe.config" size="189">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>rl5/qDc7Jz+tB+BIbOv9iMGPlRe6YJwrjmU09dnlPcs=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=DESKTOP-RF2F339\Zac" issuerKeyHash="e195ce31a2b4a5b2272e4a542ee3876f3132dd04" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>cmo/aLBzyZZnS2QDUOejJIGIyOhHDWoVqqvDAs8Zfr4=</DigestValue></Reference></SignedInfo><SignatureValue>oaml+z4AD9FrPByWS3KS6GqoG2OMLQ/QNaV2SGzUNbbcpYr4YX8i1iONrv3V4a61wZtIoW2gqD8wJRPyYX1SbJiEWXk0YbA31A3oWcoWoe6V94O9dqtZbkQW65bc7KGs4rEmSMghpexrO6sUve9blNeJojSwT5ejQ1W5U7IyzuQ=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>tbm8MPJyvj0XjTqeIUO96/ShIaZMqWBbDMm8Z3H5TNpa6dL02JvZRUHjEfVKZ/3xkFFU+crWH5PeVMcmp6EJu5tt7oZvb8EwDYQEIdzV9bFkBR2TVdvb7hAZRFxz3dhFGL+cuUhJPVn+LA5oJx9y3pWmUoAXI9YlS6UrpJB5M2k=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="be7e19cf02c3abaa156a0d47e8c8888124a3e75003644b6796c973b0683f6a72" Description="" Url=""><as:assemblyIdentity name="BatchStockUpdater.UI.exe" version="1.0.0.1" publicKeyToken="11d5c9b1ea6bfe9c" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=DESKTOP-RF2F339\Zac</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>P9V6rhjHv+RSIiXz0OkPyXHIrgV/vFcsgRD1hrui7Zw=</DigestValue></Reference></SignedInfo><SignatureValue>ECTz+FXboCYDLUhBh8BKV/n+cdKLReM3xli5XP9N9yJV6U+lGLqAf3SwQW2gHu+562jfuugX3P9R+tPKsR9GjeOD6hM7zGUTqK/Z5yu/aeYOa2JwIHUChsrOh+cEv5+7zMw5+Nt3CP0wAgHPk4qy0yrX2FNeOWSRRyNg3amDZjo=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>tbm8MPJyvj0XjTqeIUO96/ShIaZMqWBbDMm8Z3H5TNpa6dL02JvZRUHjEfVKZ/3xkFFU+crWH5PeVMcmp6EJu5tt7oZvb8EwDYQEIdzV9bFkBR2TVdvb7hAZRFxz3dhFGL+cuUhJPVn+LA5oJx9y3pWmUoAXI9YlS6UrpJB5M2k=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB5TCCAU6gAwIBAgIQQX47h3xKLLlO3LXc0wIQATANBgkqhkiG9w0BAQsFADAxMS8wLQYDVQQDHiYARABFAFMASwBUAE8AUAAtAFIARgAyAEYAMwAzADkAXABaAGEAYzAeFw0xODEwMDYwNjA3NDdaFw0xOTEwMDYxMjA3NDdaMDExLzAtBgNVBAMeJgBEAEUAUwBLAFQATwBQAC0AUgBGADIARgAzADMAOQBcAFoAYQBjMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1ubww8nK+PReNOp4hQ73r9KEhpkypYFsMybxncflM2lrp0vTYm9lFQeMR9Upn/fGQUVT5ytYfk95UxyanoQm7m23uhm9vwTANhAQh3NX1sWQFHZNV29vuEBlEXHPd2EUYv5y5SEk9Wf4sDmgnH3LelaZSgBcj1iVLpSukkHkzaQIDAQABMA0GCSqGSIb3DQEBCwUAA4GBADlpnpVVeAd2bVgunJW8gQ3NFxdONiR8h0R6DAQmsyfCzFa7zxJcSu9qvX0HR7fGMs61Wy0Xtkia5dDeEQikhxU6DeHB09ohTDh+oDy2O4a9bdt83WjbQtfk+kelVKq3wISSZ4fCfnKLY3if1gmM5zZkA1O3GqOdmS09xbQ2kvUw</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

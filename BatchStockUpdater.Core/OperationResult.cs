@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BatchStockUpdater.Core
 {
@@ -18,6 +14,7 @@ namespace BatchStockUpdater.Core
             Success = true;
         }
 
+        // Adds messages to the MessageList string list which is later used for internal notifications.
         public void AddMessage(string message)
         {
             MessageList.Add(message);

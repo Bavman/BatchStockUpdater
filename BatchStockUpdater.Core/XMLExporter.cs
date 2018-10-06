@@ -25,11 +25,9 @@ namespace BatchStockUpdater.Core
 
             var styleSheet = ReturnXMLStyleSheet(styleIndex);
 
-            var header = ReturnXMLHeader();
-
             var document = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), styleSheet);
 
-            var table = new XElement("stockTable", header);
+            var table = new XElement("stockTable");
 
             AddDataTableItemsToXMLTable(dataTable, table);
 
@@ -49,6 +47,9 @@ namespace BatchStockUpdater.Core
                 opResult.Success = false;
                 opResult.AddMessage("Faild to exported XML file due to unauthorized access of destination folder. " +
                     "\nPlease check the save path in preferences and try again");
+
+                Logging.GetInstance().LogExportXML(LogStatus.Failure, styleIndex);
+
             }
             catch (Exception ex)
             {
@@ -80,18 +81,8 @@ namespace BatchStockUpdater.Core
             return styleSheet;
         }
 
-        // Return XML Header
-        private static XElement ReturnXMLHeader()
-        {
-            return new XElement("headers",
-                new XElement("headerItem", "Item Code"),
-                new XElement("headerItem", "Item Description"),
-                new XElement("headerItem", "Current Count"),
-                new XElement("headerItem", "On Order"));
-        }
-
         // Add DataTable rows to XML XElement (table)
-        private static void AddDataTableItemsToXMLTable(DataTable dataTable, XElement table)
+        private void AddDataTableItemsToXMLTable(DataTable dataTable, XElement table)
         {
             var rows = dataTable.Rows;
 

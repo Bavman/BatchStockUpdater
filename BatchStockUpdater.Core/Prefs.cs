@@ -61,14 +61,14 @@ namespace BatchStockUpdater.Core
             set { _me._csvFileName = value; }
         }
 
-        private string _xmlFileNameStyle1 = "stocklistStyle1.xml";
+        private string _xmlFileNameStyle1 = "stocklist1.xml";
 
         public string XMLFileNameStyle1
         {
             get { return _xmlFileNameStyle1; }
         }
 
-        private string _xmlFileNameStyle2 = "stocklistStyle2.xml";
+        private string _xmlFileNameStyle2 = "stocklist2.xml";
 
         public string XMLFileNameStyle2
         {

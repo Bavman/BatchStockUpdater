@@ -132,6 +132,7 @@ namespace BatchStockUpdater.UI
                         ExportCSVButton.IsEnabled = true;
                         ExportXMLButton1.IsEnabled = true;
                         ExportXMLButton2.IsEnabled = true;
+                        OpenFolderButton.IsEnabled = true;
                         Logging.GetInstance().LogImportCSV(LogStatus.Success);
                     }
                 }
@@ -211,6 +212,23 @@ namespace BatchStockUpdater.UI
                 ;
                 MessageBox.Show(AllOperationMessages(result));
             }
+        }
+
+        private void OpenFolderButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start(_prefs.FolderName);
+            }
+            catch (System.ComponentModel.Win32Exception)
+            {
+                MessageBox.Show("Could not find the 'import / export' folder. Please check preferences or contact the Systems Administrator.");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please contact the Systems Administrator.");
+            }
+
         }
 
         private void PreferencesButton_Click(object sender, RoutedEventArgs e)
@@ -331,6 +349,7 @@ namespace BatchStockUpdater.UI
                 ExportCSVButton.IsEnabled = false;
                 ExportXMLButton1.IsEnabled = false;
                 ExportXMLButton2.IsEnabled = false;
+                OpenFolderButton.IsEnabled = false;
             }
         }
 

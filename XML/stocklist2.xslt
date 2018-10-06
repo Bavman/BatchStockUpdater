@@ -4,87 +4,94 @@
 
     <!-- Matches Item Code -->
 	<xsl:template match="/">
+
 		<html>
+
+			<link rel="stylesheet" href="stocklist2.css"/>
+
 			<head>
 				<title>Wood Stocks - Invintory (Sorted)</title>
-				<link rel="stylesheet" href="stocklist2.css"/>
-				
 			</head>
-		<body>
-      <!--Set font and background variables -->
-			<xsl:variable name="backgroundRed" select="'#FFBBBB'"/>
-			<xsl:variable name="backgroundOrange" select="'#ffd7ad'"/>
-      		<xsl:variable name="backgroundYellow" select="'#fcf7bd'"/>
-			<xsl:variable name="fontRed" select="'#DD0000'"/>
-			<table>
-			<tr>
-			<td>Wood Stocks - Invintory (Sorted)</td>
-			</tr>
-			</table>
-			<stockTable>
-			<!--Setup Table Header-->
-			<row>
-				<headerItem><xsl:value-of select="/stockTable/headers/headerItem[1]"/></headerItem>
-				<headerItem><xsl:value-of select="/stockTable/headers/headerItem[2]"/></headerItem>
-				<headerItem><xsl:value-of select="/stockTable/headers/headerItem[3]"/></headerItem>
-				<headerItem><xsl:value-of select="/stockTable/headers/headerItem[4]"/></headerItem>
-			</row>
 
-			<!--Loop Through XML Stock Items-->
-			<xsl:for-each select="/stockTable/row">
-			
-			<xsl:sort select="currentCount" data-type="number" order="ascending"/>
-			<xsl:sort select="onOrder" order="ascending"/>
-				<row>
+			<body>
 
-					<!--Colour background orange based on if currentCount is 0 and onOrder is 'Yes'-->
-					<xsl:choose>
-						<xsl:when test="number(currentCount) = 0 and onOrder='Yes'">
+				<!--Set font and background variables -->
+				<xsl:variable name="backgroundRed" select="'#FFBBBB'"/>
+				<xsl:variable name="backgroundOrange" select="'#ffd7ad'"/>
+				<xsl:variable name="backgroundYellow" select="'#fcf7bd'"/>
+				<xsl:variable name="fontRed" select="'#DD0000'"/>
+				
+				<table>
+					<tr>
+						<th>Wood Stocks - Invintory (Sorted)</th>
+					</tr>
+				</table>
 
-							<itemCode style="background-color: {$backgroundOrange}"><xsl:value-of select="itemCode"/></itemCode>
-							<itemDescription style="background-color: {$backgroundOrange}"><xsl:value-of select="itemDescription"/></itemDescription>
-							<currentCount style="background-color: {$backgroundOrange}"><xsl:value-of select="currentCount"/></currentCount>
-							<onOrder style="background-color: {$backgroundOrange}"><xsl:value-of select="onOrder"/></onOrder>
-						</xsl:when>
-						<xsl:otherwise>
+				<table>
+					<!--Setup Table Header-->
+					<tr>
+						<th width="15%">Item Code</th>
+						<th width="53%">Item Description</th>
+						<th width="17%">Stock Count</th>
+						<th width="15%">On Order</th>
+					</tr>
 
-							<!--Colour background and text red based on if currentCount is 0 and onOrder is 'No'-->
+					<!--Loop Through XML Stock Items-->
+					<xsl:for-each select="/stockTable/row">
+					
+					<xsl:sort select="currentCount" data-type="number" order="ascending"/>
+					<xsl:sort select="onOrder" order="ascending"/>
+						<tr>
+
+							<!--Colour background orange based on if currentCount is 0 and onOrder is 'Yes'-->
 							<xsl:choose>
-								<xsl:when test="number(currentCount) = 0 and onOrder='No'">
+								<xsl:when test="number(currentCount) = 0 and onOrder='Yes'">
 
-									<itemCode style="background-color: {$backgroundRed}; color: {$fontRed}; font-weight: bold"><xsl:value-of select="itemCode"/></itemCode>
-									<itemDescription style="background-color: {$backgroundRed}; color: {$fontRed}; font-weight: bold"><xsl:value-of select="itemDescription"/></itemDescription>
-									<currentCount style="background-color: {$backgroundRed}; color: {$fontRed}; font-weight: bold"><xsl:value-of select="currentCount"/></currentCount>
-									<onOrder style="background-color: {$backgroundRed}; color: {$fontRed}; font-weight: bold"><xsl:value-of select="onOrder"/></onOrder>
+									<td style="background-color: {$backgroundOrange}"><xsl:value-of select="itemCode"/></td>
+									<td style="background-color: {$backgroundOrange}"><xsl:value-of select="itemDescription"/></td>
+									<td style="background-color: {$backgroundOrange}"><xsl:value-of select="currentCount"/></td>
+									<td style="background-color: {$backgroundOrange}"><xsl:value-of select="onOrder"/></td>
 								</xsl:when>
 								<xsl:otherwise>
 
-                  <!--Colour background yellow based on if currentCount is > 0 and <4 and onOrder is 'Yes'-->
+									<!--Colour background and text red based on if currentCount is 0 and onOrder is 'No'-->
 									<xsl:choose>
-									<xsl:when test="number(currentCount) &gt; 0 and number(currentCount) &lt; 4  and onOrder='No'">
-										<itemCode style="background-color: {$backgroundYellow};"><xsl:value-of select="itemCode"/></itemCode>
-										<itemDescription style="background-color: {$backgroundYellow};"><xsl:value-of select="itemDescription"/></itemDescription>
-										<currentCount style="background-color: {$backgroundYellow};"><xsl:value-of select="currentCount"/></currentCount>
-										<onOrder style="background-color: {$backgroundYellow}"><xsl:value-of select="onOrder"/></onOrder>
-									</xsl:when>
-                    
-                  <!--Colour background grey for standard display-->
-									<xsl:otherwise>
-										<itemCode><xsl:value-of select="itemCode"/></itemCode>
-										<itemDescription><xsl:value-of select="itemDescription"/></itemDescription>
-										<currentCount><xsl:value-of select="currentCount"/></currentCount>
-										<onOrder><xsl:value-of select="onOrder"/></onOrder>
+										<xsl:when test="number(currentCount) = 0 and onOrder='No'">
 
+											<td style="background-color: {$backgroundRed}; color: {$fontRed}; font-weight: bold"><xsl:value-of select="itemCode"/></td>
+											<td style="background-color: {$backgroundRed}; color: {$fontRed}; font-weight: bold"><xsl:value-of select="itemDescription"/></td>
+											<td style="background-color: {$backgroundRed}; color: {$fontRed}; font-weight: bold"><xsl:value-of select="currentCount"/></td>
+											<td style="background-color: {$backgroundRed}; color: {$fontRed}; font-weight: bold"><xsl:value-of select="onOrder"/></td>
+
+										</xsl:when>
+										<xsl:otherwise>
+
+						<!--Colour background yellow based on if currentCount is > 0 and <4 and onOrder is 'Yes'-->
+											<xsl:choose>
+											<xsl:when test="number(currentCount) &gt; 0 and number(currentCount) &lt; 4  and onOrder='No'">
+												<td style="background-color: {$backgroundYellow};"><xsl:value-of select="itemCode"/></td>
+												<td style="background-color: {$backgroundYellow};"><xsl:value-of select="itemDescription"/></td>
+												<td style="background-color: {$backgroundYellow};"><xsl:value-of select="currentCount"/></td>
+												<td style="background-color: {$backgroundYellow}"><xsl:value-of select="onOrder"/></td>
+											</xsl:when>
+							
+						<!--Colour background grey for standard display-->
+											<xsl:otherwise>
+												<td><xsl:value-of select="itemCode"/></td>
+												<td><xsl:value-of select="itemDescription"/></td>
+												<td><xsl:value-of select="currentCount"/></td>
+												<td><xsl:value-of select="onOrder"/></td>
+
+												</xsl:otherwise>
+											</xsl:choose>
 										</xsl:otherwise>
 									</xsl:choose>
 								</xsl:otherwise>
 							</xsl:choose>
-						</xsl:otherwise>
-					</xsl:choose>
-				</row>
-			</xsl:for-each>
-			</stockTable>
-		</body>
+						</tr>
+					</xsl:for-each>
+				</table>
+			</body>
 		</html>
 	</xsl:template>
 

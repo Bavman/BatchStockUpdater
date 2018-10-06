@@ -133,7 +133,7 @@ namespace BatchStockUpdater.Core
             WriteEntryToLogFIle(_me._sessionLogFilePath, entry);
         }
 
-        // Log Import CSV
+        // Log Export XML
         public void LogExportXML(LogStatus loginStatus, int styleSheet)
         {
             var status = ReturnLogStatus(loginStatus);

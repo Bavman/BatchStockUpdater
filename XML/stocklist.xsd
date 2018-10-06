@@ -3,13 +3,7 @@
     <xsd:element name="stockTable">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element name="headers">
-                    <xsd:complexType>
-                        <xsd:sequence>
-                            <xsd:element name="headerItem" type="xsd:string" maxOccurs="4"/>
-                        </xsd:sequence>
-                    </xsd:complexType>
-                </xsd:element>
+
                 <xsd:element name="row" maxOccurs="unbounded">
                     <xsd:complexType mixed="true">
                         <xsd:sequence>
@@ -28,6 +22,7 @@
                         </xsd:sequence>
                     </xsd:complexType>
                 </xsd:element>
+                
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
