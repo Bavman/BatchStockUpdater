@@ -28,3 +28,7 @@ C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.UI\obj\Debug\Login
 C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.UI\obj\Debug\Preferences.baml
 C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.UI\obj\Debug\ManageUsers.g.cs
 C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.UI\obj\Debug\ManageUsers.baml
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.UI\bin\Debug\BatchStockUpdater.UI.exe.manifest
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.UI\bin\Debug\BatchStockUpdater.UI.application
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.UI\obj\Debug\BatchStockUpdater.UI.exe.manifest
+C:\Users\Zac\source\repos\BatchStockUpdater\BatchStockUpdater.UI\obj\Debug\BatchStockUpdater.UI.application

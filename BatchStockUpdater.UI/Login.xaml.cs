@@ -25,7 +25,7 @@ namespace BatchStockUpdater.UI
             UserNameTextBox.Focus();
 
             // Auto Login
-            _useAdminCreds = true;
+            _useAdminCreds = false;
 
             if (_useAdminCreds)
             {

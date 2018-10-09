@@ -42,38 +42,38 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BatchStockUpdater.Core.dll" size="18432">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BatchStockUpdater.Core.dll" size="19456">
       <assemblyIdentity name="BatchStockUpdater.Core" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>FdksRYU5UJK9ASuNBfySPfozY6ATCrQJwaxks9KgWWo=</dsig:DigestValue>
+        <dsig:DigestValue>TZHNXALkNy2UufmYshD2JH7N6KE/XiwQbWXBClcoowM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BatchStockUpdater.UI.exe" size="40408">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BatchStockUpdater.UI.exe" size="46552">
       <assemblyIdentity name="BatchStockUpdater.UI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>MTJ5UO45m41Rdxzk91ghNXdJBxZJUi5DuIrdhn8TZzE=</dsig:DigestValue>
+        <dsig:DigestValue>0yPb0h1Tfu0XiYU891lQ9h+A2fu+43whXLGc5/NvaeQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BatchStockUpdater.Users.dll" size="11776">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BatchStockUpdater.Users.dll" size="12288">
       <assemblyIdentity name="BatchStockUpdater.Users" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>O6QR/flfDmL4Qjd3qF/yfQBFccukTbOyhEbt2lLPeCU=</dsig:DigestValue>
+        <dsig:DigestValue>78MOjcaIZ3fb/aIKcXAtrH9/a1VMuqBbZ/uSF840bK4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

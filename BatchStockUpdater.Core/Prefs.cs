@@ -25,7 +25,7 @@ namespace BatchStockUpdater.Core
         }
 
 
-        private bool _checkFileDateAndTime = true;
+        private bool _checkFileDateAndTime = false;
         public bool CheckFileDateAndTime
         {
             get { return _me._checkFileDateAndTime; }
@@ -140,7 +140,8 @@ namespace BatchStockUpdater.Core
             }
             else
             {
-                MessageBox.Show("Preferences file missing.\n Will be using default settings");
+                // Disabled Messagebox to reduce confusion on first load.
+                // MessageBox.Show("Preferences file missing.\n Will be using default settings");
                 _me.SavePrefs();
 
                 successfulLoad = false;
